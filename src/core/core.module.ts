@@ -5,6 +5,8 @@ import { GraphQLModule } from '@nestjs/graphql'
 
 import { AccountModule } from '../modules/auth/account/account.module'
 import { SessionModule } from '../modules/auth/session/session.module'
+import { VerificationModule } from '../modules/auth/verification/verification.module'
+import { MailModule } from '../modules/libs/mail/mail.module'
 import { IS_DEV_ENV } from '../shared/utils/is-dev.util'
 
 import { getGraphQLConfig } from './config/graphql.config'
@@ -26,7 +28,9 @@ import { RedisModule } from './redis/redis.module'
 		PrismaModule,
 		RedisModule,
 		AccountModule,
-		SessionModule
+		SessionModule,
+		VerificationModule,
+		MailModule
 	]
 })
 export class CoreModule {}
