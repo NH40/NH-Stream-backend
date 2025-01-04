@@ -139,6 +139,8 @@ exports.Prisma.UserScalarFieldEnum = {
   isEmailVerified: 'isEmailVerified',
   isTotpEnabled: 'isTotpEnabled',
   totpSecret: 'totpSecret',
+  isDeactivated: 'isDeactivated',
+  deactivatedAt: 'deactivatedAt',
   createdAt: 'createdAt',
   updatedAt: 'updatedAt'
 };
@@ -159,7 +161,8 @@ exports.Prisma.NullsOrder = {
 };
 exports.TokenType = exports.$Enums.TokenType = {
   EMAIL_VERIFICATION: 'EMAIL_VERIFICATION',
-  PASSWORD_RESET: 'PASSWORD_RESET'
+  PASSWORD_RESET: 'PASSWORD_RESET',
+  DEACTIVATE_ACCOUNT: 'DEACTIVATE_ACCOUNT'
 };
 
 exports.Prisma.ModelName = {
