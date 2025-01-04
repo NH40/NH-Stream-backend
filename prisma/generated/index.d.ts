@@ -29,7 +29,8 @@ export type User = $Result.DefaultSelection<Prisma.$UserPayload>
  */
 export namespace $Enums {
   export const TokenType: {
-  EMAIL_VERIFICATION: 'EMAIL_VERIFICATION'
+  EMAIL_VERIFICATION: 'EMAIL_VERIFICATION',
+  PASSWORD_RESET: 'PASSWORD_RESET'
 };
 
 export type TokenType = (typeof TokenType)[keyof typeof TokenType]
