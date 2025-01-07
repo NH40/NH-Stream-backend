@@ -14,10 +14,20 @@ export type PrismaPromise<T> = $Public.PrismaPromise<T>
 
 
 /**
+ * Model Category
+ * 
+ */
+export type Category = $Result.DefaultSelection<Prisma.$CategoryPayload>
+/**
  * Model SocialLink
  * 
  */
 export type SocialLink = $Result.DefaultSelection<Prisma.$SocialLinkPayload>
+/**
+ * Model Stream
+ * 
+ */
+export type Stream = $Result.DefaultSelection<Prisma.$StreamPayload>
 /**
  * Model Token
  * 
@@ -54,8 +64,8 @@ export const TokenType: typeof $Enums.TokenType
  * @example
  * ```
  * const prisma = new PrismaClient()
- * // Fetch zero or more SocialLinks
- * const socialLinks = await prisma.socialLink.findMany()
+ * // Fetch zero or more Categories
+ * const categories = await prisma.category.findMany()
  * ```
  *
  * 
@@ -75,8 +85,8 @@ export class PrismaClient<
    * @example
    * ```
    * const prisma = new PrismaClient()
-   * // Fetch zero or more SocialLinks
-   * const socialLinks = await prisma.socialLink.findMany()
+   * // Fetch zero or more Categories
+   * const categories = await prisma.category.findMany()
    * ```
    *
    * 
@@ -171,6 +181,16 @@ export class PrismaClient<
   $extends: $Extensions.ExtendsHook<"extends", Prisma.TypeMapCb, ExtArgs>
 
       /**
+   * `prisma.category`: Exposes CRUD operations for the **Category** model.
+    * Example usage:
+    * ```ts
+    * // Fetch zero or more Categories
+    * const categories = await prisma.category.findMany()
+    * ```
+    */
+  get category(): Prisma.CategoryDelegate<ExtArgs>;
+
+  /**
    * `prisma.socialLink`: Exposes CRUD operations for the **SocialLink** model.
     * Example usage:
     * ```ts
@@ -179,6 +199,16 @@ export class PrismaClient<
     * ```
     */
   get socialLink(): Prisma.SocialLinkDelegate<ExtArgs>;
+
+  /**
+   * `prisma.stream`: Exposes CRUD operations for the **Stream** model.
+    * Example usage:
+    * ```ts
+    * // Fetch zero or more Streams
+    * const streams = await prisma.stream.findMany()
+    * ```
+    */
+  get stream(): Prisma.StreamDelegate<ExtArgs>;
 
   /**
    * `prisma.token`: Exposes CRUD operations for the **Token** model.
@@ -639,7 +669,9 @@ export namespace Prisma {
 
 
   export const ModelName: {
+    Category: 'Category',
     SocialLink: 'SocialLink',
+    Stream: 'Stream',
     Token: 'Token',
     User: 'User'
   };
@@ -657,10 +689,80 @@ export namespace Prisma {
 
   export type TypeMap<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs, ClientOptions = {}> = {
     meta: {
-      modelProps: "socialLink" | "token" | "user"
+      modelProps: "category" | "socialLink" | "stream" | "token" | "user"
       txIsolationLevel: Prisma.TransactionIsolationLevel
     }
     model: {
+      Category: {
+        payload: Prisma.$CategoryPayload<ExtArgs>
+        fields: Prisma.CategoryFieldRefs
+        operations: {
+          findUnique: {
+            args: Prisma.CategoryFindUniqueArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$CategoryPayload> | null
+          }
+          findUniqueOrThrow: {
+            args: Prisma.CategoryFindUniqueOrThrowArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$CategoryPayload>
+          }
+          findFirst: {
+            args: Prisma.CategoryFindFirstArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$CategoryPayload> | null
+          }
+          findFirstOrThrow: {
+            args: Prisma.CategoryFindFirstOrThrowArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$CategoryPayload>
+          }
+          findMany: {
+            args: Prisma.CategoryFindManyArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$CategoryPayload>[]
+          }
+          create: {
+            args: Prisma.CategoryCreateArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$CategoryPayload>
+          }
+          createMany: {
+            args: Prisma.CategoryCreateManyArgs<ExtArgs>
+            result: BatchPayload
+          }
+          createManyAndReturn: {
+            args: Prisma.CategoryCreateManyAndReturnArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$CategoryPayload>[]
+          }
+          delete: {
+            args: Prisma.CategoryDeleteArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$CategoryPayload>
+          }
+          update: {
+            args: Prisma.CategoryUpdateArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$CategoryPayload>
+          }
+          deleteMany: {
+            args: Prisma.CategoryDeleteManyArgs<ExtArgs>
+            result: BatchPayload
+          }
+          updateMany: {
+            args: Prisma.CategoryUpdateManyArgs<ExtArgs>
+            result: BatchPayload
+          }
+          upsert: {
+            args: Prisma.CategoryUpsertArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$CategoryPayload>
+          }
+          aggregate: {
+            args: Prisma.CategoryAggregateArgs<ExtArgs>
+            result: $Utils.Optional<AggregateCategory>
+          }
+          groupBy: {
+            args: Prisma.CategoryGroupByArgs<ExtArgs>
+            result: $Utils.Optional<CategoryGroupByOutputType>[]
+          }
+          count: {
+            args: Prisma.CategoryCountArgs<ExtArgs>
+            result: $Utils.Optional<CategoryCountAggregateOutputType> | number
+          }
+        }
+      }
       SocialLink: {
         payload: Prisma.$SocialLinkPayload<ExtArgs>
         fields: Prisma.SocialLinkFieldRefs
@@ -728,6 +830,76 @@ export namespace Prisma {
           count: {
             args: Prisma.SocialLinkCountArgs<ExtArgs>
             result: $Utils.Optional<SocialLinkCountAggregateOutputType> | number
+          }
+        }
+      }
+      Stream: {
+        payload: Prisma.$StreamPayload<ExtArgs>
+        fields: Prisma.StreamFieldRefs
+        operations: {
+          findUnique: {
+            args: Prisma.StreamFindUniqueArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$StreamPayload> | null
+          }
+          findUniqueOrThrow: {
+            args: Prisma.StreamFindUniqueOrThrowArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$StreamPayload>
+          }
+          findFirst: {
+            args: Prisma.StreamFindFirstArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$StreamPayload> | null
+          }
+          findFirstOrThrow: {
+            args: Prisma.StreamFindFirstOrThrowArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$StreamPayload>
+          }
+          findMany: {
+            args: Prisma.StreamFindManyArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$StreamPayload>[]
+          }
+          create: {
+            args: Prisma.StreamCreateArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$StreamPayload>
+          }
+          createMany: {
+            args: Prisma.StreamCreateManyArgs<ExtArgs>
+            result: BatchPayload
+          }
+          createManyAndReturn: {
+            args: Prisma.StreamCreateManyAndReturnArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$StreamPayload>[]
+          }
+          delete: {
+            args: Prisma.StreamDeleteArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$StreamPayload>
+          }
+          update: {
+            args: Prisma.StreamUpdateArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$StreamPayload>
+          }
+          deleteMany: {
+            args: Prisma.StreamDeleteManyArgs<ExtArgs>
+            result: BatchPayload
+          }
+          updateMany: {
+            args: Prisma.StreamUpdateManyArgs<ExtArgs>
+            result: BatchPayload
+          }
+          upsert: {
+            args: Prisma.StreamUpsertArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$StreamPayload>
+          }
+          aggregate: {
+            args: Prisma.StreamAggregateArgs<ExtArgs>
+            result: $Utils.Optional<AggregateStream>
+          }
+          groupBy: {
+            args: Prisma.StreamGroupByArgs<ExtArgs>
+            result: $Utils.Optional<StreamGroupByOutputType>[]
+          }
+          count: {
+            args: Prisma.StreamCountArgs<ExtArgs>
+            result: $Utils.Optional<StreamCountAggregateOutputType> | number
           }
         }
       }
@@ -1028,6 +1200,37 @@ export namespace Prisma {
 
 
   /**
+   * Count Type CategoryCountOutputType
+   */
+
+  export type CategoryCountOutputType = {
+    streams: number
+  }
+
+  export type CategoryCountOutputTypeSelect<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    streams?: boolean | CategoryCountOutputTypeCountStreamsArgs
+  }
+
+  // Custom InputTypes
+  /**
+   * CategoryCountOutputType without action
+   */
+  export type CategoryCountOutputTypeDefaultArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the CategoryCountOutputType
+     */
+    select?: CategoryCountOutputTypeSelect<ExtArgs> | null
+  }
+
+  /**
+   * CategoryCountOutputType without action
+   */
+  export type CategoryCountOutputTypeCountStreamsArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    where?: StreamWhereInput
+  }
+
+
+  /**
    * Count Type UserCountOutputType
    */
 
@@ -1070,6 +1273,978 @@ export namespace Prisma {
   /**
    * Models
    */
+
+  /**
+   * Model Category
+   */
+
+  export type AggregateCategory = {
+    _count: CategoryCountAggregateOutputType | null
+    _min: CategoryMinAggregateOutputType | null
+    _max: CategoryMaxAggregateOutputType | null
+  }
+
+  export type CategoryMinAggregateOutputType = {
+    id: string | null
+    title: string | null
+    slug: string | null
+    description: string | null
+    thumbnailUrl: string | null
+    createdAt: Date | null
+    updatedAt: Date | null
+  }
+
+  export type CategoryMaxAggregateOutputType = {
+    id: string | null
+    title: string | null
+    slug: string | null
+    description: string | null
+    thumbnailUrl: string | null
+    createdAt: Date | null
+    updatedAt: Date | null
+  }
+
+  export type CategoryCountAggregateOutputType = {
+    id: number
+    title: number
+    slug: number
+    description: number
+    thumbnailUrl: number
+    createdAt: number
+    updatedAt: number
+    _all: number
+  }
+
+
+  export type CategoryMinAggregateInputType = {
+    id?: true
+    title?: true
+    slug?: true
+    description?: true
+    thumbnailUrl?: true
+    createdAt?: true
+    updatedAt?: true
+  }
+
+  export type CategoryMaxAggregateInputType = {
+    id?: true
+    title?: true
+    slug?: true
+    description?: true
+    thumbnailUrl?: true
+    createdAt?: true
+    updatedAt?: true
+  }
+
+  export type CategoryCountAggregateInputType = {
+    id?: true
+    title?: true
+    slug?: true
+    description?: true
+    thumbnailUrl?: true
+    createdAt?: true
+    updatedAt?: true
+    _all?: true
+  }
+
+  export type CategoryAggregateArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Filter which Category to aggregate.
+     */
+    where?: CategoryWhereInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/sorting Sorting Docs}
+     * 
+     * Determine the order of Categories to fetch.
+     */
+    orderBy?: CategoryOrderByWithRelationInput | CategoryOrderByWithRelationInput[]
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination#cursor-based-pagination Cursor Docs}
+     * 
+     * Sets the start position
+     */
+    cursor?: CategoryWhereUniqueInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Take `±n` Categories from the position of the cursor.
+     */
+    take?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Skip the first `n` Categories.
+     */
+    skip?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/aggregations Aggregation Docs}
+     * 
+     * Count returned Categories
+    **/
+    _count?: true | CategoryCountAggregateInputType
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/aggregations Aggregation Docs}
+     * 
+     * Select which fields to find the minimum value
+    **/
+    _min?: CategoryMinAggregateInputType
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/aggregations Aggregation Docs}
+     * 
+     * Select which fields to find the maximum value
+    **/
+    _max?: CategoryMaxAggregateInputType
+  }
+
+  export type GetCategoryAggregateType<T extends CategoryAggregateArgs> = {
+        [P in keyof T & keyof AggregateCategory]: P extends '_count' | 'count'
+      ? T[P] extends true
+        ? number
+        : GetScalarType<T[P], AggregateCategory[P]>
+      : GetScalarType<T[P], AggregateCategory[P]>
+  }
+
+
+
+
+  export type CategoryGroupByArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    where?: CategoryWhereInput
+    orderBy?: CategoryOrderByWithAggregationInput | CategoryOrderByWithAggregationInput[]
+    by: CategoryScalarFieldEnum[] | CategoryScalarFieldEnum
+    having?: CategoryScalarWhereWithAggregatesInput
+    take?: number
+    skip?: number
+    _count?: CategoryCountAggregateInputType | true
+    _min?: CategoryMinAggregateInputType
+    _max?: CategoryMaxAggregateInputType
+  }
+
+  export type CategoryGroupByOutputType = {
+    id: string
+    title: string
+    slug: string
+    description: string | null
+    thumbnailUrl: string
+    createdAt: Date
+    updatedAt: Date
+    _count: CategoryCountAggregateOutputType | null
+    _min: CategoryMinAggregateOutputType | null
+    _max: CategoryMaxAggregateOutputType | null
+  }
+
+  type GetCategoryGroupByPayload<T extends CategoryGroupByArgs> = Prisma.PrismaPromise<
+    Array<
+      PickEnumerable<CategoryGroupByOutputType, T['by']> &
+        {
+          [P in ((keyof T) & (keyof CategoryGroupByOutputType))]: P extends '_count'
+            ? T[P] extends boolean
+              ? number
+              : GetScalarType<T[P], CategoryGroupByOutputType[P]>
+            : GetScalarType<T[P], CategoryGroupByOutputType[P]>
+        }
+      >
+    >
+
+
+  export type CategorySelect<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetSelect<{
+    id?: boolean
+    title?: boolean
+    slug?: boolean
+    description?: boolean
+    thumbnailUrl?: boolean
+    createdAt?: boolean
+    updatedAt?: boolean
+    streams?: boolean | Category$streamsArgs<ExtArgs>
+    _count?: boolean | CategoryCountOutputTypeDefaultArgs<ExtArgs>
+  }, ExtArgs["result"]["category"]>
+
+  export type CategorySelectCreateManyAndReturn<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetSelect<{
+    id?: boolean
+    title?: boolean
+    slug?: boolean
+    description?: boolean
+    thumbnailUrl?: boolean
+    createdAt?: boolean
+    updatedAt?: boolean
+  }, ExtArgs["result"]["category"]>
+
+  export type CategorySelectScalar = {
+    id?: boolean
+    title?: boolean
+    slug?: boolean
+    description?: boolean
+    thumbnailUrl?: boolean
+    createdAt?: boolean
+    updatedAt?: boolean
+  }
+
+  export type CategoryInclude<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    streams?: boolean | Category$streamsArgs<ExtArgs>
+    _count?: boolean | CategoryCountOutputTypeDefaultArgs<ExtArgs>
+  }
+  export type CategoryIncludeCreateManyAndReturn<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {}
+
+  export type $CategoryPayload<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    name: "Category"
+    objects: {
+      streams: Prisma.$StreamPayload<ExtArgs>[]
+    }
+    scalars: $Extensions.GetPayloadResult<{
+      id: string
+      title: string
+      slug: string
+      description: string | null
+      thumbnailUrl: string
+      createdAt: Date
+      updatedAt: Date
+    }, ExtArgs["result"]["category"]>
+    composites: {}
+  }
+
+  type CategoryGetPayload<S extends boolean | null | undefined | CategoryDefaultArgs> = $Result.GetResult<Prisma.$CategoryPayload, S>
+
+  type CategoryCountArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = 
+    Omit<CategoryFindManyArgs, 'select' | 'include' | 'distinct'> & {
+      select?: CategoryCountAggregateInputType | true
+    }
+
+  export interface CategoryDelegate<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> {
+    [K: symbol]: { types: Prisma.TypeMap<ExtArgs>['model']['Category'], meta: { name: 'Category' } }
+    /**
+     * Find zero or one Category that matches the filter.
+     * @param {CategoryFindUniqueArgs} args - Arguments to find a Category
+     * @example
+     * // Get one Category
+     * const category = await prisma.category.findUnique({
+     *   where: {
+     *     // ... provide filter here
+     *   }
+     * })
+     */
+    findUnique<T extends CategoryFindUniqueArgs>(args: SelectSubset<T, CategoryFindUniqueArgs<ExtArgs>>): Prisma__CategoryClient<$Result.GetResult<Prisma.$CategoryPayload<ExtArgs>, T, "findUnique"> | null, null, ExtArgs>
+
+    /**
+     * Find one Category that matches the filter or throw an error with `error.code='P2025'` 
+     * if no matches were found.
+     * @param {CategoryFindUniqueOrThrowArgs} args - Arguments to find a Category
+     * @example
+     * // Get one Category
+     * const category = await prisma.category.findUniqueOrThrow({
+     *   where: {
+     *     // ... provide filter here
+     *   }
+     * })
+     */
+    findUniqueOrThrow<T extends CategoryFindUniqueOrThrowArgs>(args: SelectSubset<T, CategoryFindUniqueOrThrowArgs<ExtArgs>>): Prisma__CategoryClient<$Result.GetResult<Prisma.$CategoryPayload<ExtArgs>, T, "findUniqueOrThrow">, never, ExtArgs>
+
+    /**
+     * Find the first Category that matches the filter.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {CategoryFindFirstArgs} args - Arguments to find a Category
+     * @example
+     * // Get one Category
+     * const category = await prisma.category.findFirst({
+     *   where: {
+     *     // ... provide filter here
+     *   }
+     * })
+     */
+    findFirst<T extends CategoryFindFirstArgs>(args?: SelectSubset<T, CategoryFindFirstArgs<ExtArgs>>): Prisma__CategoryClient<$Result.GetResult<Prisma.$CategoryPayload<ExtArgs>, T, "findFirst"> | null, null, ExtArgs>
+
+    /**
+     * Find the first Category that matches the filter or
+     * throw `PrismaKnownClientError` with `P2025` code if no matches were found.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {CategoryFindFirstOrThrowArgs} args - Arguments to find a Category
+     * @example
+     * // Get one Category
+     * const category = await prisma.category.findFirstOrThrow({
+     *   where: {
+     *     // ... provide filter here
+     *   }
+     * })
+     */
+    findFirstOrThrow<T extends CategoryFindFirstOrThrowArgs>(args?: SelectSubset<T, CategoryFindFirstOrThrowArgs<ExtArgs>>): Prisma__CategoryClient<$Result.GetResult<Prisma.$CategoryPayload<ExtArgs>, T, "findFirstOrThrow">, never, ExtArgs>
+
+    /**
+     * Find zero or more Categories that matches the filter.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {CategoryFindManyArgs} args - Arguments to filter and select certain fields only.
+     * @example
+     * // Get all Categories
+     * const categories = await prisma.category.findMany()
+     * 
+     * // Get first 10 Categories
+     * const categories = await prisma.category.findMany({ take: 10 })
+     * 
+     * // Only select the `id`
+     * const categoryWithIdOnly = await prisma.category.findMany({ select: { id: true } })
+     * 
+     */
+    findMany<T extends CategoryFindManyArgs>(args?: SelectSubset<T, CategoryFindManyArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$CategoryPayload<ExtArgs>, T, "findMany">>
+
+    /**
+     * Create a Category.
+     * @param {CategoryCreateArgs} args - Arguments to create a Category.
+     * @example
+     * // Create one Category
+     * const Category = await prisma.category.create({
+     *   data: {
+     *     // ... data to create a Category
+     *   }
+     * })
+     * 
+     */
+    create<T extends CategoryCreateArgs>(args: SelectSubset<T, CategoryCreateArgs<ExtArgs>>): Prisma__CategoryClient<$Result.GetResult<Prisma.$CategoryPayload<ExtArgs>, T, "create">, never, ExtArgs>
+
+    /**
+     * Create many Categories.
+     * @param {CategoryCreateManyArgs} args - Arguments to create many Categories.
+     * @example
+     * // Create many Categories
+     * const category = await prisma.category.createMany({
+     *   data: [
+     *     // ... provide data here
+     *   ]
+     * })
+     *     
+     */
+    createMany<T extends CategoryCreateManyArgs>(args?: SelectSubset<T, CategoryCreateManyArgs<ExtArgs>>): Prisma.PrismaPromise<BatchPayload>
+
+    /**
+     * Create many Categories and returns the data saved in the database.
+     * @param {CategoryCreateManyAndReturnArgs} args - Arguments to create many Categories.
+     * @example
+     * // Create many Categories
+     * const category = await prisma.category.createManyAndReturn({
+     *   data: [
+     *     // ... provide data here
+     *   ]
+     * })
+     * 
+     * // Create many Categories and only return the `id`
+     * const categoryWithIdOnly = await prisma.category.createManyAndReturn({ 
+     *   select: { id: true },
+     *   data: [
+     *     // ... provide data here
+     *   ]
+     * })
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * 
+     */
+    createManyAndReturn<T extends CategoryCreateManyAndReturnArgs>(args?: SelectSubset<T, CategoryCreateManyAndReturnArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$CategoryPayload<ExtArgs>, T, "createManyAndReturn">>
+
+    /**
+     * Delete a Category.
+     * @param {CategoryDeleteArgs} args - Arguments to delete one Category.
+     * @example
+     * // Delete one Category
+     * const Category = await prisma.category.delete({
+     *   where: {
+     *     // ... filter to delete one Category
+     *   }
+     * })
+     * 
+     */
+    delete<T extends CategoryDeleteArgs>(args: SelectSubset<T, CategoryDeleteArgs<ExtArgs>>): Prisma__CategoryClient<$Result.GetResult<Prisma.$CategoryPayload<ExtArgs>, T, "delete">, never, ExtArgs>
+
+    /**
+     * Update one Category.
+     * @param {CategoryUpdateArgs} args - Arguments to update one Category.
+     * @example
+     * // Update one Category
+     * const category = await prisma.category.update({
+     *   where: {
+     *     // ... provide filter here
+     *   },
+     *   data: {
+     *     // ... provide data here
+     *   }
+     * })
+     * 
+     */
+    update<T extends CategoryUpdateArgs>(args: SelectSubset<T, CategoryUpdateArgs<ExtArgs>>): Prisma__CategoryClient<$Result.GetResult<Prisma.$CategoryPayload<ExtArgs>, T, "update">, never, ExtArgs>
+
+    /**
+     * Delete zero or more Categories.
+     * @param {CategoryDeleteManyArgs} args - Arguments to filter Categories to delete.
+     * @example
+     * // Delete a few Categories
+     * const { count } = await prisma.category.deleteMany({
+     *   where: {
+     *     // ... provide filter here
+     *   }
+     * })
+     * 
+     */
+    deleteMany<T extends CategoryDeleteManyArgs>(args?: SelectSubset<T, CategoryDeleteManyArgs<ExtArgs>>): Prisma.PrismaPromise<BatchPayload>
+
+    /**
+     * Update zero or more Categories.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {CategoryUpdateManyArgs} args - Arguments to update one or more rows.
+     * @example
+     * // Update many Categories
+     * const category = await prisma.category.updateMany({
+     *   where: {
+     *     // ... provide filter here
+     *   },
+     *   data: {
+     *     // ... provide data here
+     *   }
+     * })
+     * 
+     */
+    updateMany<T extends CategoryUpdateManyArgs>(args: SelectSubset<T, CategoryUpdateManyArgs<ExtArgs>>): Prisma.PrismaPromise<BatchPayload>
+
+    /**
+     * Create or update one Category.
+     * @param {CategoryUpsertArgs} args - Arguments to update or create a Category.
+     * @example
+     * // Update or create a Category
+     * const category = await prisma.category.upsert({
+     *   create: {
+     *     // ... data to create a Category
+     *   },
+     *   update: {
+     *     // ... in case it already exists, update
+     *   },
+     *   where: {
+     *     // ... the filter for the Category we want to update
+     *   }
+     * })
+     */
+    upsert<T extends CategoryUpsertArgs>(args: SelectSubset<T, CategoryUpsertArgs<ExtArgs>>): Prisma__CategoryClient<$Result.GetResult<Prisma.$CategoryPayload<ExtArgs>, T, "upsert">, never, ExtArgs>
+
+
+    /**
+     * Count the number of Categories.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {CategoryCountArgs} args - Arguments to filter Categories to count.
+     * @example
+     * // Count the number of Categories
+     * const count = await prisma.category.count({
+     *   where: {
+     *     // ... the filter for the Categories we want to count
+     *   }
+     * })
+    **/
+    count<T extends CategoryCountArgs>(
+      args?: Subset<T, CategoryCountArgs>,
+    ): Prisma.PrismaPromise<
+      T extends $Utils.Record<'select', any>
+        ? T['select'] extends true
+          ? number
+          : GetScalarType<T['select'], CategoryCountAggregateOutputType>
+        : number
+    >
+
+    /**
+     * Allows you to perform aggregations operations on a Category.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {CategoryAggregateArgs} args - Select which aggregations you would like to apply and on what fields.
+     * @example
+     * // Ordered by age ascending
+     * // Where email contains prisma.io
+     * // Limited to the 10 users
+     * const aggregations = await prisma.user.aggregate({
+     *   _avg: {
+     *     age: true,
+     *   },
+     *   where: {
+     *     email: {
+     *       contains: "prisma.io",
+     *     },
+     *   },
+     *   orderBy: {
+     *     age: "asc",
+     *   },
+     *   take: 10,
+     * })
+    **/
+    aggregate<T extends CategoryAggregateArgs>(args: Subset<T, CategoryAggregateArgs>): Prisma.PrismaPromise<GetCategoryAggregateType<T>>
+
+    /**
+     * Group by Category.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {CategoryGroupByArgs} args - Group by arguments.
+     * @example
+     * // Group by city, order by createdAt, get count
+     * const result = await prisma.user.groupBy({
+     *   by: ['city', 'createdAt'],
+     *   orderBy: {
+     *     createdAt: true
+     *   },
+     *   _count: {
+     *     _all: true
+     *   },
+     * })
+     * 
+    **/
+    groupBy<
+      T extends CategoryGroupByArgs,
+      HasSelectOrTake extends Or<
+        Extends<'skip', Keys<T>>,
+        Extends<'take', Keys<T>>
+      >,
+      OrderByArg extends True extends HasSelectOrTake
+        ? { orderBy: CategoryGroupByArgs['orderBy'] }
+        : { orderBy?: CategoryGroupByArgs['orderBy'] },
+      OrderFields extends ExcludeUnderscoreKeys<Keys<MaybeTupleToUnion<T['orderBy']>>>,
+      ByFields extends MaybeTupleToUnion<T['by']>,
+      ByValid extends Has<ByFields, OrderFields>,
+      HavingFields extends GetHavingFields<T['having']>,
+      HavingValid extends Has<ByFields, HavingFields>,
+      ByEmpty extends T['by'] extends never[] ? True : False,
+      InputErrors extends ByEmpty extends True
+      ? `Error: "by" must not be empty.`
+      : HavingValid extends False
+      ? {
+          [P in HavingFields]: P extends ByFields
+            ? never
+            : P extends string
+            ? `Error: Field "${P}" used in "having" needs to be provided in "by".`
+            : [
+                Error,
+                'Field ',
+                P,
+                ` in "having" needs to be provided in "by"`,
+              ]
+        }[HavingFields]
+      : 'take' extends Keys<T>
+      ? 'orderBy' extends Keys<T>
+        ? ByValid extends True
+          ? {}
+          : {
+              [P in OrderFields]: P extends ByFields
+                ? never
+                : `Error: Field "${P}" in "orderBy" needs to be provided in "by"`
+            }[OrderFields]
+        : 'Error: If you provide "take", you also need to provide "orderBy"'
+      : 'skip' extends Keys<T>
+      ? 'orderBy' extends Keys<T>
+        ? ByValid extends True
+          ? {}
+          : {
+              [P in OrderFields]: P extends ByFields
+                ? never
+                : `Error: Field "${P}" in "orderBy" needs to be provided in "by"`
+            }[OrderFields]
+        : 'Error: If you provide "skip", you also need to provide "orderBy"'
+      : ByValid extends True
+      ? {}
+      : {
+          [P in OrderFields]: P extends ByFields
+            ? never
+            : `Error: Field "${P}" in "orderBy" needs to be provided in "by"`
+        }[OrderFields]
+    >(args: SubsetIntersection<T, CategoryGroupByArgs, OrderByArg> & InputErrors): {} extends InputErrors ? GetCategoryGroupByPayload<T> : Prisma.PrismaPromise<InputErrors>
+  /**
+   * Fields of the Category model
+   */
+  readonly fields: CategoryFieldRefs;
+  }
+
+  /**
+   * The delegate class that acts as a "Promise-like" for Category.
+   * Why is this prefixed with `Prisma__`?
+   * Because we want to prevent naming conflicts as mentioned in
+   * https://github.com/prisma/prisma-client-js/issues/707
+   */
+  export interface Prisma__CategoryClient<T, Null = never, ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> extends Prisma.PrismaPromise<T> {
+    readonly [Symbol.toStringTag]: "PrismaPromise"
+    streams<T extends Category$streamsArgs<ExtArgs> = {}>(args?: Subset<T, Category$streamsArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$StreamPayload<ExtArgs>, T, "findMany"> | Null>
+    /**
+     * Attaches callbacks for the resolution and/or rejection of the Promise.
+     * @param onfulfilled The callback to execute when the Promise is resolved.
+     * @param onrejected The callback to execute when the Promise is rejected.
+     * @returns A Promise for the completion of which ever callback is executed.
+     */
+    then<TResult1 = T, TResult2 = never>(onfulfilled?: ((value: T) => TResult1 | PromiseLike<TResult1>) | undefined | null, onrejected?: ((reason: any) => TResult2 | PromiseLike<TResult2>) | undefined | null): $Utils.JsPromise<TResult1 | TResult2>
+    /**
+     * Attaches a callback for only the rejection of the Promise.
+     * @param onrejected The callback to execute when the Promise is rejected.
+     * @returns A Promise for the completion of the callback.
+     */
+    catch<TResult = never>(onrejected?: ((reason: any) => TResult | PromiseLike<TResult>) | undefined | null): $Utils.JsPromise<T | TResult>
+    /**
+     * Attaches a callback that is invoked when the Promise is settled (fulfilled or rejected). The
+     * resolved value cannot be modified from the callback.
+     * @param onfinally The callback to execute when the Promise is settled (fulfilled or rejected).
+     * @returns A Promise for the completion of the callback.
+     */
+    finally(onfinally?: (() => void) | undefined | null): $Utils.JsPromise<T>
+  }
+
+
+
+
+  /**
+   * Fields of the Category model
+   */ 
+  interface CategoryFieldRefs {
+    readonly id: FieldRef<"Category", 'String'>
+    readonly title: FieldRef<"Category", 'String'>
+    readonly slug: FieldRef<"Category", 'String'>
+    readonly description: FieldRef<"Category", 'String'>
+    readonly thumbnailUrl: FieldRef<"Category", 'String'>
+    readonly createdAt: FieldRef<"Category", 'DateTime'>
+    readonly updatedAt: FieldRef<"Category", 'DateTime'>
+  }
+    
+
+  // Custom InputTypes
+  /**
+   * Category findUnique
+   */
+  export type CategoryFindUniqueArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the Category
+     */
+    select?: CategorySelect<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: CategoryInclude<ExtArgs> | null
+    /**
+     * Filter, which Category to fetch.
+     */
+    where: CategoryWhereUniqueInput
+  }
+
+  /**
+   * Category findUniqueOrThrow
+   */
+  export type CategoryFindUniqueOrThrowArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the Category
+     */
+    select?: CategorySelect<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: CategoryInclude<ExtArgs> | null
+    /**
+     * Filter, which Category to fetch.
+     */
+    where: CategoryWhereUniqueInput
+  }
+
+  /**
+   * Category findFirst
+   */
+  export type CategoryFindFirstArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the Category
+     */
+    select?: CategorySelect<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: CategoryInclude<ExtArgs> | null
+    /**
+     * Filter, which Category to fetch.
+     */
+    where?: CategoryWhereInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/sorting Sorting Docs}
+     * 
+     * Determine the order of Categories to fetch.
+     */
+    orderBy?: CategoryOrderByWithRelationInput | CategoryOrderByWithRelationInput[]
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination#cursor-based-pagination Cursor Docs}
+     * 
+     * Sets the position for searching for Categories.
+     */
+    cursor?: CategoryWhereUniqueInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Take `±n` Categories from the position of the cursor.
+     */
+    take?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Skip the first `n` Categories.
+     */
+    skip?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/distinct Distinct Docs}
+     * 
+     * Filter by unique combinations of Categories.
+     */
+    distinct?: CategoryScalarFieldEnum | CategoryScalarFieldEnum[]
+  }
+
+  /**
+   * Category findFirstOrThrow
+   */
+  export type CategoryFindFirstOrThrowArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the Category
+     */
+    select?: CategorySelect<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: CategoryInclude<ExtArgs> | null
+    /**
+     * Filter, which Category to fetch.
+     */
+    where?: CategoryWhereInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/sorting Sorting Docs}
+     * 
+     * Determine the order of Categories to fetch.
+     */
+    orderBy?: CategoryOrderByWithRelationInput | CategoryOrderByWithRelationInput[]
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination#cursor-based-pagination Cursor Docs}
+     * 
+     * Sets the position for searching for Categories.
+     */
+    cursor?: CategoryWhereUniqueInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Take `±n` Categories from the position of the cursor.
+     */
+    take?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Skip the first `n` Categories.
+     */
+    skip?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/distinct Distinct Docs}
+     * 
+     * Filter by unique combinations of Categories.
+     */
+    distinct?: CategoryScalarFieldEnum | CategoryScalarFieldEnum[]
+  }
+
+  /**
+   * Category findMany
+   */
+  export type CategoryFindManyArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the Category
+     */
+    select?: CategorySelect<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: CategoryInclude<ExtArgs> | null
+    /**
+     * Filter, which Categories to fetch.
+     */
+    where?: CategoryWhereInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/sorting Sorting Docs}
+     * 
+     * Determine the order of Categories to fetch.
+     */
+    orderBy?: CategoryOrderByWithRelationInput | CategoryOrderByWithRelationInput[]
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination#cursor-based-pagination Cursor Docs}
+     * 
+     * Sets the position for listing Categories.
+     */
+    cursor?: CategoryWhereUniqueInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Take `±n` Categories from the position of the cursor.
+     */
+    take?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Skip the first `n` Categories.
+     */
+    skip?: number
+    distinct?: CategoryScalarFieldEnum | CategoryScalarFieldEnum[]
+  }
+
+  /**
+   * Category create
+   */
+  export type CategoryCreateArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the Category
+     */
+    select?: CategorySelect<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: CategoryInclude<ExtArgs> | null
+    /**
+     * The data needed to create a Category.
+     */
+    data: XOR<CategoryCreateInput, CategoryUncheckedCreateInput>
+  }
+
+  /**
+   * Category createMany
+   */
+  export type CategoryCreateManyArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * The data used to create many Categories.
+     */
+    data: CategoryCreateManyInput | CategoryCreateManyInput[]
+    skipDuplicates?: boolean
+  }
+
+  /**
+   * Category createManyAndReturn
+   */
+  export type CategoryCreateManyAndReturnArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the Category
+     */
+    select?: CategorySelectCreateManyAndReturn<ExtArgs> | null
+    /**
+     * The data used to create many Categories.
+     */
+    data: CategoryCreateManyInput | CategoryCreateManyInput[]
+    skipDuplicates?: boolean
+  }
+
+  /**
+   * Category update
+   */
+  export type CategoryUpdateArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the Category
+     */
+    select?: CategorySelect<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: CategoryInclude<ExtArgs> | null
+    /**
+     * The data needed to update a Category.
+     */
+    data: XOR<CategoryUpdateInput, CategoryUncheckedUpdateInput>
+    /**
+     * Choose, which Category to update.
+     */
+    where: CategoryWhereUniqueInput
+  }
+
+  /**
+   * Category updateMany
+   */
+  export type CategoryUpdateManyArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * The data used to update Categories.
+     */
+    data: XOR<CategoryUpdateManyMutationInput, CategoryUncheckedUpdateManyInput>
+    /**
+     * Filter which Categories to update
+     */
+    where?: CategoryWhereInput
+  }
+
+  /**
+   * Category upsert
+   */
+  export type CategoryUpsertArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the Category
+     */
+    select?: CategorySelect<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: CategoryInclude<ExtArgs> | null
+    /**
+     * The filter to search for the Category to update in case it exists.
+     */
+    where: CategoryWhereUniqueInput
+    /**
+     * In case the Category found by the `where` argument doesn't exist, create a new Category with this data.
+     */
+    create: XOR<CategoryCreateInput, CategoryUncheckedCreateInput>
+    /**
+     * In case the Category was found with the provided `where` argument, update it with this data.
+     */
+    update: XOR<CategoryUpdateInput, CategoryUncheckedUpdateInput>
+  }
+
+  /**
+   * Category delete
+   */
+  export type CategoryDeleteArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the Category
+     */
+    select?: CategorySelect<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: CategoryInclude<ExtArgs> | null
+    /**
+     * Filter which Category to delete.
+     */
+    where: CategoryWhereUniqueInput
+  }
+
+  /**
+   * Category deleteMany
+   */
+  export type CategoryDeleteManyArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Filter which Categories to delete
+     */
+    where?: CategoryWhereInput
+  }
+
+  /**
+   * Category.streams
+   */
+  export type Category$streamsArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the Stream
+     */
+    select?: StreamSelect<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: StreamInclude<ExtArgs> | null
+    where?: StreamWhereInput
+    orderBy?: StreamOrderByWithRelationInput | StreamOrderByWithRelationInput[]
+    cursor?: StreamWhereUniqueInput
+    take?: number
+    skip?: number
+    distinct?: StreamScalarFieldEnum | StreamScalarFieldEnum[]
+  }
+
+  /**
+   * Category without action
+   */
+  export type CategoryDefaultArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the Category
+     */
+    select?: CategorySelect<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: CategoryInclude<ExtArgs> | null
+  }
+
 
   /**
    * Model SocialLink
@@ -2074,6 +3249,1047 @@ export namespace Prisma {
      * Choose, which related nodes to fetch as well
      */
     include?: SocialLinkInclude<ExtArgs> | null
+  }
+
+
+  /**
+   * Model Stream
+   */
+
+  export type AggregateStream = {
+    _count: StreamCountAggregateOutputType | null
+    _min: StreamMinAggregateOutputType | null
+    _max: StreamMaxAggregateOutputType | null
+  }
+
+  export type StreamMinAggregateOutputType = {
+    id: string | null
+    title: string | null
+    thumbnailUrl: string | null
+    ingressId: string | null
+    serverUrl: string | null
+    streamKey: string | null
+    isLive: boolean | null
+    userId: string | null
+    categoryId: string | null
+    createdAt: Date | null
+    updatedAt: Date | null
+  }
+
+  export type StreamMaxAggregateOutputType = {
+    id: string | null
+    title: string | null
+    thumbnailUrl: string | null
+    ingressId: string | null
+    serverUrl: string | null
+    streamKey: string | null
+    isLive: boolean | null
+    userId: string | null
+    categoryId: string | null
+    createdAt: Date | null
+    updatedAt: Date | null
+  }
+
+  export type StreamCountAggregateOutputType = {
+    id: number
+    title: number
+    thumbnailUrl: number
+    ingressId: number
+    serverUrl: number
+    streamKey: number
+    isLive: number
+    userId: number
+    categoryId: number
+    createdAt: number
+    updatedAt: number
+    _all: number
+  }
+
+
+  export type StreamMinAggregateInputType = {
+    id?: true
+    title?: true
+    thumbnailUrl?: true
+    ingressId?: true
+    serverUrl?: true
+    streamKey?: true
+    isLive?: true
+    userId?: true
+    categoryId?: true
+    createdAt?: true
+    updatedAt?: true
+  }
+
+  export type StreamMaxAggregateInputType = {
+    id?: true
+    title?: true
+    thumbnailUrl?: true
+    ingressId?: true
+    serverUrl?: true
+    streamKey?: true
+    isLive?: true
+    userId?: true
+    categoryId?: true
+    createdAt?: true
+    updatedAt?: true
+  }
+
+  export type StreamCountAggregateInputType = {
+    id?: true
+    title?: true
+    thumbnailUrl?: true
+    ingressId?: true
+    serverUrl?: true
+    streamKey?: true
+    isLive?: true
+    userId?: true
+    categoryId?: true
+    createdAt?: true
+    updatedAt?: true
+    _all?: true
+  }
+
+  export type StreamAggregateArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Filter which Stream to aggregate.
+     */
+    where?: StreamWhereInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/sorting Sorting Docs}
+     * 
+     * Determine the order of Streams to fetch.
+     */
+    orderBy?: StreamOrderByWithRelationInput | StreamOrderByWithRelationInput[]
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination#cursor-based-pagination Cursor Docs}
+     * 
+     * Sets the start position
+     */
+    cursor?: StreamWhereUniqueInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Take `±n` Streams from the position of the cursor.
+     */
+    take?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Skip the first `n` Streams.
+     */
+    skip?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/aggregations Aggregation Docs}
+     * 
+     * Count returned Streams
+    **/
+    _count?: true | StreamCountAggregateInputType
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/aggregations Aggregation Docs}
+     * 
+     * Select which fields to find the minimum value
+    **/
+    _min?: StreamMinAggregateInputType
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/aggregations Aggregation Docs}
+     * 
+     * Select which fields to find the maximum value
+    **/
+    _max?: StreamMaxAggregateInputType
+  }
+
+  export type GetStreamAggregateType<T extends StreamAggregateArgs> = {
+        [P in keyof T & keyof AggregateStream]: P extends '_count' | 'count'
+      ? T[P] extends true
+        ? number
+        : GetScalarType<T[P], AggregateStream[P]>
+      : GetScalarType<T[P], AggregateStream[P]>
+  }
+
+
+
+
+  export type StreamGroupByArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    where?: StreamWhereInput
+    orderBy?: StreamOrderByWithAggregationInput | StreamOrderByWithAggregationInput[]
+    by: StreamScalarFieldEnum[] | StreamScalarFieldEnum
+    having?: StreamScalarWhereWithAggregatesInput
+    take?: number
+    skip?: number
+    _count?: StreamCountAggregateInputType | true
+    _min?: StreamMinAggregateInputType
+    _max?: StreamMaxAggregateInputType
+  }
+
+  export type StreamGroupByOutputType = {
+    id: string
+    title: string
+    thumbnailUrl: string | null
+    ingressId: string | null
+    serverUrl: string | null
+    streamKey: string | null
+    isLive: boolean
+    userId: string | null
+    categoryId: string | null
+    createdAt: Date
+    updatedAt: Date
+    _count: StreamCountAggregateOutputType | null
+    _min: StreamMinAggregateOutputType | null
+    _max: StreamMaxAggregateOutputType | null
+  }
+
+  type GetStreamGroupByPayload<T extends StreamGroupByArgs> = Prisma.PrismaPromise<
+    Array<
+      PickEnumerable<StreamGroupByOutputType, T['by']> &
+        {
+          [P in ((keyof T) & (keyof StreamGroupByOutputType))]: P extends '_count'
+            ? T[P] extends boolean
+              ? number
+              : GetScalarType<T[P], StreamGroupByOutputType[P]>
+            : GetScalarType<T[P], StreamGroupByOutputType[P]>
+        }
+      >
+    >
+
+
+  export type StreamSelect<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetSelect<{
+    id?: boolean
+    title?: boolean
+    thumbnailUrl?: boolean
+    ingressId?: boolean
+    serverUrl?: boolean
+    streamKey?: boolean
+    isLive?: boolean
+    userId?: boolean
+    categoryId?: boolean
+    createdAt?: boolean
+    updatedAt?: boolean
+    user?: boolean | Stream$userArgs<ExtArgs>
+    category?: boolean | Stream$categoryArgs<ExtArgs>
+  }, ExtArgs["result"]["stream"]>
+
+  export type StreamSelectCreateManyAndReturn<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetSelect<{
+    id?: boolean
+    title?: boolean
+    thumbnailUrl?: boolean
+    ingressId?: boolean
+    serverUrl?: boolean
+    streamKey?: boolean
+    isLive?: boolean
+    userId?: boolean
+    categoryId?: boolean
+    createdAt?: boolean
+    updatedAt?: boolean
+    user?: boolean | Stream$userArgs<ExtArgs>
+    category?: boolean | Stream$categoryArgs<ExtArgs>
+  }, ExtArgs["result"]["stream"]>
+
+  export type StreamSelectScalar = {
+    id?: boolean
+    title?: boolean
+    thumbnailUrl?: boolean
+    ingressId?: boolean
+    serverUrl?: boolean
+    streamKey?: boolean
+    isLive?: boolean
+    userId?: boolean
+    categoryId?: boolean
+    createdAt?: boolean
+    updatedAt?: boolean
+  }
+
+  export type StreamInclude<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    user?: boolean | Stream$userArgs<ExtArgs>
+    category?: boolean | Stream$categoryArgs<ExtArgs>
+  }
+  export type StreamIncludeCreateManyAndReturn<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    user?: boolean | Stream$userArgs<ExtArgs>
+    category?: boolean | Stream$categoryArgs<ExtArgs>
+  }
+
+  export type $StreamPayload<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    name: "Stream"
+    objects: {
+      user: Prisma.$UserPayload<ExtArgs> | null
+      category: Prisma.$CategoryPayload<ExtArgs> | null
+    }
+    scalars: $Extensions.GetPayloadResult<{
+      id: string
+      title: string
+      thumbnailUrl: string | null
+      ingressId: string | null
+      serverUrl: string | null
+      streamKey: string | null
+      isLive: boolean
+      userId: string | null
+      categoryId: string | null
+      createdAt: Date
+      updatedAt: Date
+    }, ExtArgs["result"]["stream"]>
+    composites: {}
+  }
+
+  type StreamGetPayload<S extends boolean | null | undefined | StreamDefaultArgs> = $Result.GetResult<Prisma.$StreamPayload, S>
+
+  type StreamCountArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = 
+    Omit<StreamFindManyArgs, 'select' | 'include' | 'distinct'> & {
+      select?: StreamCountAggregateInputType | true
+    }
+
+  export interface StreamDelegate<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> {
+    [K: symbol]: { types: Prisma.TypeMap<ExtArgs>['model']['Stream'], meta: { name: 'Stream' } }
+    /**
+     * Find zero or one Stream that matches the filter.
+     * @param {StreamFindUniqueArgs} args - Arguments to find a Stream
+     * @example
+     * // Get one Stream
+     * const stream = await prisma.stream.findUnique({
+     *   where: {
+     *     // ... provide filter here
+     *   }
+     * })
+     */
+    findUnique<T extends StreamFindUniqueArgs>(args: SelectSubset<T, StreamFindUniqueArgs<ExtArgs>>): Prisma__StreamClient<$Result.GetResult<Prisma.$StreamPayload<ExtArgs>, T, "findUnique"> | null, null, ExtArgs>
+
+    /**
+     * Find one Stream that matches the filter or throw an error with `error.code='P2025'` 
+     * if no matches were found.
+     * @param {StreamFindUniqueOrThrowArgs} args - Arguments to find a Stream
+     * @example
+     * // Get one Stream
+     * const stream = await prisma.stream.findUniqueOrThrow({
+     *   where: {
+     *     // ... provide filter here
+     *   }
+     * })
+     */
+    findUniqueOrThrow<T extends StreamFindUniqueOrThrowArgs>(args: SelectSubset<T, StreamFindUniqueOrThrowArgs<ExtArgs>>): Prisma__StreamClient<$Result.GetResult<Prisma.$StreamPayload<ExtArgs>, T, "findUniqueOrThrow">, never, ExtArgs>
+
+    /**
+     * Find the first Stream that matches the filter.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {StreamFindFirstArgs} args - Arguments to find a Stream
+     * @example
+     * // Get one Stream
+     * const stream = await prisma.stream.findFirst({
+     *   where: {
+     *     // ... provide filter here
+     *   }
+     * })
+     */
+    findFirst<T extends StreamFindFirstArgs>(args?: SelectSubset<T, StreamFindFirstArgs<ExtArgs>>): Prisma__StreamClient<$Result.GetResult<Prisma.$StreamPayload<ExtArgs>, T, "findFirst"> | null, null, ExtArgs>
+
+    /**
+     * Find the first Stream that matches the filter or
+     * throw `PrismaKnownClientError` with `P2025` code if no matches were found.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {StreamFindFirstOrThrowArgs} args - Arguments to find a Stream
+     * @example
+     * // Get one Stream
+     * const stream = await prisma.stream.findFirstOrThrow({
+     *   where: {
+     *     // ... provide filter here
+     *   }
+     * })
+     */
+    findFirstOrThrow<T extends StreamFindFirstOrThrowArgs>(args?: SelectSubset<T, StreamFindFirstOrThrowArgs<ExtArgs>>): Prisma__StreamClient<$Result.GetResult<Prisma.$StreamPayload<ExtArgs>, T, "findFirstOrThrow">, never, ExtArgs>
+
+    /**
+     * Find zero or more Streams that matches the filter.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {StreamFindManyArgs} args - Arguments to filter and select certain fields only.
+     * @example
+     * // Get all Streams
+     * const streams = await prisma.stream.findMany()
+     * 
+     * // Get first 10 Streams
+     * const streams = await prisma.stream.findMany({ take: 10 })
+     * 
+     * // Only select the `id`
+     * const streamWithIdOnly = await prisma.stream.findMany({ select: { id: true } })
+     * 
+     */
+    findMany<T extends StreamFindManyArgs>(args?: SelectSubset<T, StreamFindManyArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$StreamPayload<ExtArgs>, T, "findMany">>
+
+    /**
+     * Create a Stream.
+     * @param {StreamCreateArgs} args - Arguments to create a Stream.
+     * @example
+     * // Create one Stream
+     * const Stream = await prisma.stream.create({
+     *   data: {
+     *     // ... data to create a Stream
+     *   }
+     * })
+     * 
+     */
+    create<T extends StreamCreateArgs>(args: SelectSubset<T, StreamCreateArgs<ExtArgs>>): Prisma__StreamClient<$Result.GetResult<Prisma.$StreamPayload<ExtArgs>, T, "create">, never, ExtArgs>
+
+    /**
+     * Create many Streams.
+     * @param {StreamCreateManyArgs} args - Arguments to create many Streams.
+     * @example
+     * // Create many Streams
+     * const stream = await prisma.stream.createMany({
+     *   data: [
+     *     // ... provide data here
+     *   ]
+     * })
+     *     
+     */
+    createMany<T extends StreamCreateManyArgs>(args?: SelectSubset<T, StreamCreateManyArgs<ExtArgs>>): Prisma.PrismaPromise<BatchPayload>
+
+    /**
+     * Create many Streams and returns the data saved in the database.
+     * @param {StreamCreateManyAndReturnArgs} args - Arguments to create many Streams.
+     * @example
+     * // Create many Streams
+     * const stream = await prisma.stream.createManyAndReturn({
+     *   data: [
+     *     // ... provide data here
+     *   ]
+     * })
+     * 
+     * // Create many Streams and only return the `id`
+     * const streamWithIdOnly = await prisma.stream.createManyAndReturn({ 
+     *   select: { id: true },
+     *   data: [
+     *     // ... provide data here
+     *   ]
+     * })
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * 
+     */
+    createManyAndReturn<T extends StreamCreateManyAndReturnArgs>(args?: SelectSubset<T, StreamCreateManyAndReturnArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$StreamPayload<ExtArgs>, T, "createManyAndReturn">>
+
+    /**
+     * Delete a Stream.
+     * @param {StreamDeleteArgs} args - Arguments to delete one Stream.
+     * @example
+     * // Delete one Stream
+     * const Stream = await prisma.stream.delete({
+     *   where: {
+     *     // ... filter to delete one Stream
+     *   }
+     * })
+     * 
+     */
+    delete<T extends StreamDeleteArgs>(args: SelectSubset<T, StreamDeleteArgs<ExtArgs>>): Prisma__StreamClient<$Result.GetResult<Prisma.$StreamPayload<ExtArgs>, T, "delete">, never, ExtArgs>
+
+    /**
+     * Update one Stream.
+     * @param {StreamUpdateArgs} args - Arguments to update one Stream.
+     * @example
+     * // Update one Stream
+     * const stream = await prisma.stream.update({
+     *   where: {
+     *     // ... provide filter here
+     *   },
+     *   data: {
+     *     // ... provide data here
+     *   }
+     * })
+     * 
+     */
+    update<T extends StreamUpdateArgs>(args: SelectSubset<T, StreamUpdateArgs<ExtArgs>>): Prisma__StreamClient<$Result.GetResult<Prisma.$StreamPayload<ExtArgs>, T, "update">, never, ExtArgs>
+
+    /**
+     * Delete zero or more Streams.
+     * @param {StreamDeleteManyArgs} args - Arguments to filter Streams to delete.
+     * @example
+     * // Delete a few Streams
+     * const { count } = await prisma.stream.deleteMany({
+     *   where: {
+     *     // ... provide filter here
+     *   }
+     * })
+     * 
+     */
+    deleteMany<T extends StreamDeleteManyArgs>(args?: SelectSubset<T, StreamDeleteManyArgs<ExtArgs>>): Prisma.PrismaPromise<BatchPayload>
+
+    /**
+     * Update zero or more Streams.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {StreamUpdateManyArgs} args - Arguments to update one or more rows.
+     * @example
+     * // Update many Streams
+     * const stream = await prisma.stream.updateMany({
+     *   where: {
+     *     // ... provide filter here
+     *   },
+     *   data: {
+     *     // ... provide data here
+     *   }
+     * })
+     * 
+     */
+    updateMany<T extends StreamUpdateManyArgs>(args: SelectSubset<T, StreamUpdateManyArgs<ExtArgs>>): Prisma.PrismaPromise<BatchPayload>
+
+    /**
+     * Create or update one Stream.
+     * @param {StreamUpsertArgs} args - Arguments to update or create a Stream.
+     * @example
+     * // Update or create a Stream
+     * const stream = await prisma.stream.upsert({
+     *   create: {
+     *     // ... data to create a Stream
+     *   },
+     *   update: {
+     *     // ... in case it already exists, update
+     *   },
+     *   where: {
+     *     // ... the filter for the Stream we want to update
+     *   }
+     * })
+     */
+    upsert<T extends StreamUpsertArgs>(args: SelectSubset<T, StreamUpsertArgs<ExtArgs>>): Prisma__StreamClient<$Result.GetResult<Prisma.$StreamPayload<ExtArgs>, T, "upsert">, never, ExtArgs>
+
+
+    /**
+     * Count the number of Streams.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {StreamCountArgs} args - Arguments to filter Streams to count.
+     * @example
+     * // Count the number of Streams
+     * const count = await prisma.stream.count({
+     *   where: {
+     *     // ... the filter for the Streams we want to count
+     *   }
+     * })
+    **/
+    count<T extends StreamCountArgs>(
+      args?: Subset<T, StreamCountArgs>,
+    ): Prisma.PrismaPromise<
+      T extends $Utils.Record<'select', any>
+        ? T['select'] extends true
+          ? number
+          : GetScalarType<T['select'], StreamCountAggregateOutputType>
+        : number
+    >
+
+    /**
+     * Allows you to perform aggregations operations on a Stream.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {StreamAggregateArgs} args - Select which aggregations you would like to apply and on what fields.
+     * @example
+     * // Ordered by age ascending
+     * // Where email contains prisma.io
+     * // Limited to the 10 users
+     * const aggregations = await prisma.user.aggregate({
+     *   _avg: {
+     *     age: true,
+     *   },
+     *   where: {
+     *     email: {
+     *       contains: "prisma.io",
+     *     },
+     *   },
+     *   orderBy: {
+     *     age: "asc",
+     *   },
+     *   take: 10,
+     * })
+    **/
+    aggregate<T extends StreamAggregateArgs>(args: Subset<T, StreamAggregateArgs>): Prisma.PrismaPromise<GetStreamAggregateType<T>>
+
+    /**
+     * Group by Stream.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {StreamGroupByArgs} args - Group by arguments.
+     * @example
+     * // Group by city, order by createdAt, get count
+     * const result = await prisma.user.groupBy({
+     *   by: ['city', 'createdAt'],
+     *   orderBy: {
+     *     createdAt: true
+     *   },
+     *   _count: {
+     *     _all: true
+     *   },
+     * })
+     * 
+    **/
+    groupBy<
+      T extends StreamGroupByArgs,
+      HasSelectOrTake extends Or<
+        Extends<'skip', Keys<T>>,
+        Extends<'take', Keys<T>>
+      >,
+      OrderByArg extends True extends HasSelectOrTake
+        ? { orderBy: StreamGroupByArgs['orderBy'] }
+        : { orderBy?: StreamGroupByArgs['orderBy'] },
+      OrderFields extends ExcludeUnderscoreKeys<Keys<MaybeTupleToUnion<T['orderBy']>>>,
+      ByFields extends MaybeTupleToUnion<T['by']>,
+      ByValid extends Has<ByFields, OrderFields>,
+      HavingFields extends GetHavingFields<T['having']>,
+      HavingValid extends Has<ByFields, HavingFields>,
+      ByEmpty extends T['by'] extends never[] ? True : False,
+      InputErrors extends ByEmpty extends True
+      ? `Error: "by" must not be empty.`
+      : HavingValid extends False
+      ? {
+          [P in HavingFields]: P extends ByFields
+            ? never
+            : P extends string
+            ? `Error: Field "${P}" used in "having" needs to be provided in "by".`
+            : [
+                Error,
+                'Field ',
+                P,
+                ` in "having" needs to be provided in "by"`,
+              ]
+        }[HavingFields]
+      : 'take' extends Keys<T>
+      ? 'orderBy' extends Keys<T>
+        ? ByValid extends True
+          ? {}
+          : {
+              [P in OrderFields]: P extends ByFields
+                ? never
+                : `Error: Field "${P}" in "orderBy" needs to be provided in "by"`
+            }[OrderFields]
+        : 'Error: If you provide "take", you also need to provide "orderBy"'
+      : 'skip' extends Keys<T>
+      ? 'orderBy' extends Keys<T>
+        ? ByValid extends True
+          ? {}
+          : {
+              [P in OrderFields]: P extends ByFields
+                ? never
+                : `Error: Field "${P}" in "orderBy" needs to be provided in "by"`
+            }[OrderFields]
+        : 'Error: If you provide "skip", you also need to provide "orderBy"'
+      : ByValid extends True
+      ? {}
+      : {
+          [P in OrderFields]: P extends ByFields
+            ? never
+            : `Error: Field "${P}" in "orderBy" needs to be provided in "by"`
+        }[OrderFields]
+    >(args: SubsetIntersection<T, StreamGroupByArgs, OrderByArg> & InputErrors): {} extends InputErrors ? GetStreamGroupByPayload<T> : Prisma.PrismaPromise<InputErrors>
+  /**
+   * Fields of the Stream model
+   */
+  readonly fields: StreamFieldRefs;
+  }
+
+  /**
+   * The delegate class that acts as a "Promise-like" for Stream.
+   * Why is this prefixed with `Prisma__`?
+   * Because we want to prevent naming conflicts as mentioned in
+   * https://github.com/prisma/prisma-client-js/issues/707
+   */
+  export interface Prisma__StreamClient<T, Null = never, ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> extends Prisma.PrismaPromise<T> {
+    readonly [Symbol.toStringTag]: "PrismaPromise"
+    user<T extends Stream$userArgs<ExtArgs> = {}>(args?: Subset<T, Stream$userArgs<ExtArgs>>): Prisma__UserClient<$Result.GetResult<Prisma.$UserPayload<ExtArgs>, T, "findUniqueOrThrow"> | null, null, ExtArgs>
+    category<T extends Stream$categoryArgs<ExtArgs> = {}>(args?: Subset<T, Stream$categoryArgs<ExtArgs>>): Prisma__CategoryClient<$Result.GetResult<Prisma.$CategoryPayload<ExtArgs>, T, "findUniqueOrThrow"> | null, null, ExtArgs>
+    /**
+     * Attaches callbacks for the resolution and/or rejection of the Promise.
+     * @param onfulfilled The callback to execute when the Promise is resolved.
+     * @param onrejected The callback to execute when the Promise is rejected.
+     * @returns A Promise for the completion of which ever callback is executed.
+     */
+    then<TResult1 = T, TResult2 = never>(onfulfilled?: ((value: T) => TResult1 | PromiseLike<TResult1>) | undefined | null, onrejected?: ((reason: any) => TResult2 | PromiseLike<TResult2>) | undefined | null): $Utils.JsPromise<TResult1 | TResult2>
+    /**
+     * Attaches a callback for only the rejection of the Promise.
+     * @param onrejected The callback to execute when the Promise is rejected.
+     * @returns A Promise for the completion of the callback.
+     */
+    catch<TResult = never>(onrejected?: ((reason: any) => TResult | PromiseLike<TResult>) | undefined | null): $Utils.JsPromise<T | TResult>
+    /**
+     * Attaches a callback that is invoked when the Promise is settled (fulfilled or rejected). The
+     * resolved value cannot be modified from the callback.
+     * @param onfinally The callback to execute when the Promise is settled (fulfilled or rejected).
+     * @returns A Promise for the completion of the callback.
+     */
+    finally(onfinally?: (() => void) | undefined | null): $Utils.JsPromise<T>
+  }
+
+
+
+
+  /**
+   * Fields of the Stream model
+   */ 
+  interface StreamFieldRefs {
+    readonly id: FieldRef<"Stream", 'String'>
+    readonly title: FieldRef<"Stream", 'String'>
+    readonly thumbnailUrl: FieldRef<"Stream", 'String'>
+    readonly ingressId: FieldRef<"Stream", 'String'>
+    readonly serverUrl: FieldRef<"Stream", 'String'>
+    readonly streamKey: FieldRef<"Stream", 'String'>
+    readonly isLive: FieldRef<"Stream", 'Boolean'>
+    readonly userId: FieldRef<"Stream", 'String'>
+    readonly categoryId: FieldRef<"Stream", 'String'>
+    readonly createdAt: FieldRef<"Stream", 'DateTime'>
+    readonly updatedAt: FieldRef<"Stream", 'DateTime'>
+  }
+    
+
+  // Custom InputTypes
+  /**
+   * Stream findUnique
+   */
+  export type StreamFindUniqueArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the Stream
+     */
+    select?: StreamSelect<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: StreamInclude<ExtArgs> | null
+    /**
+     * Filter, which Stream to fetch.
+     */
+    where: StreamWhereUniqueInput
+  }
+
+  /**
+   * Stream findUniqueOrThrow
+   */
+  export type StreamFindUniqueOrThrowArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the Stream
+     */
+    select?: StreamSelect<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: StreamInclude<ExtArgs> | null
+    /**
+     * Filter, which Stream to fetch.
+     */
+    where: StreamWhereUniqueInput
+  }
+
+  /**
+   * Stream findFirst
+   */
+  export type StreamFindFirstArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the Stream
+     */
+    select?: StreamSelect<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: StreamInclude<ExtArgs> | null
+    /**
+     * Filter, which Stream to fetch.
+     */
+    where?: StreamWhereInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/sorting Sorting Docs}
+     * 
+     * Determine the order of Streams to fetch.
+     */
+    orderBy?: StreamOrderByWithRelationInput | StreamOrderByWithRelationInput[]
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination#cursor-based-pagination Cursor Docs}
+     * 
+     * Sets the position for searching for Streams.
+     */
+    cursor?: StreamWhereUniqueInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Take `±n` Streams from the position of the cursor.
+     */
+    take?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Skip the first `n` Streams.
+     */
+    skip?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/distinct Distinct Docs}
+     * 
+     * Filter by unique combinations of Streams.
+     */
+    distinct?: StreamScalarFieldEnum | StreamScalarFieldEnum[]
+  }
+
+  /**
+   * Stream findFirstOrThrow
+   */
+  export type StreamFindFirstOrThrowArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the Stream
+     */
+    select?: StreamSelect<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: StreamInclude<ExtArgs> | null
+    /**
+     * Filter, which Stream to fetch.
+     */
+    where?: StreamWhereInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/sorting Sorting Docs}
+     * 
+     * Determine the order of Streams to fetch.
+     */
+    orderBy?: StreamOrderByWithRelationInput | StreamOrderByWithRelationInput[]
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination#cursor-based-pagination Cursor Docs}
+     * 
+     * Sets the position for searching for Streams.
+     */
+    cursor?: StreamWhereUniqueInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Take `±n` Streams from the position of the cursor.
+     */
+    take?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Skip the first `n` Streams.
+     */
+    skip?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/distinct Distinct Docs}
+     * 
+     * Filter by unique combinations of Streams.
+     */
+    distinct?: StreamScalarFieldEnum | StreamScalarFieldEnum[]
+  }
+
+  /**
+   * Stream findMany
+   */
+  export type StreamFindManyArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the Stream
+     */
+    select?: StreamSelect<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: StreamInclude<ExtArgs> | null
+    /**
+     * Filter, which Streams to fetch.
+     */
+    where?: StreamWhereInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/sorting Sorting Docs}
+     * 
+     * Determine the order of Streams to fetch.
+     */
+    orderBy?: StreamOrderByWithRelationInput | StreamOrderByWithRelationInput[]
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination#cursor-based-pagination Cursor Docs}
+     * 
+     * Sets the position for listing Streams.
+     */
+    cursor?: StreamWhereUniqueInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Take `±n` Streams from the position of the cursor.
+     */
+    take?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Skip the first `n` Streams.
+     */
+    skip?: number
+    distinct?: StreamScalarFieldEnum | StreamScalarFieldEnum[]
+  }
+
+  /**
+   * Stream create
+   */
+  export type StreamCreateArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the Stream
+     */
+    select?: StreamSelect<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: StreamInclude<ExtArgs> | null
+    /**
+     * The data needed to create a Stream.
+     */
+    data: XOR<StreamCreateInput, StreamUncheckedCreateInput>
+  }
+
+  /**
+   * Stream createMany
+   */
+  export type StreamCreateManyArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * The data used to create many Streams.
+     */
+    data: StreamCreateManyInput | StreamCreateManyInput[]
+    skipDuplicates?: boolean
+  }
+
+  /**
+   * Stream createManyAndReturn
+   */
+  export type StreamCreateManyAndReturnArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the Stream
+     */
+    select?: StreamSelectCreateManyAndReturn<ExtArgs> | null
+    /**
+     * The data used to create many Streams.
+     */
+    data: StreamCreateManyInput | StreamCreateManyInput[]
+    skipDuplicates?: boolean
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: StreamIncludeCreateManyAndReturn<ExtArgs> | null
+  }
+
+  /**
+   * Stream update
+   */
+  export type StreamUpdateArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the Stream
+     */
+    select?: StreamSelect<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: StreamInclude<ExtArgs> | null
+    /**
+     * The data needed to update a Stream.
+     */
+    data: XOR<StreamUpdateInput, StreamUncheckedUpdateInput>
+    /**
+     * Choose, which Stream to update.
+     */
+    where: StreamWhereUniqueInput
+  }
+
+  /**
+   * Stream updateMany
+   */
+  export type StreamUpdateManyArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * The data used to update Streams.
+     */
+    data: XOR<StreamUpdateManyMutationInput, StreamUncheckedUpdateManyInput>
+    /**
+     * Filter which Streams to update
+     */
+    where?: StreamWhereInput
+  }
+
+  /**
+   * Stream upsert
+   */
+  export type StreamUpsertArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the Stream
+     */
+    select?: StreamSelect<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: StreamInclude<ExtArgs> | null
+    /**
+     * The filter to search for the Stream to update in case it exists.
+     */
+    where: StreamWhereUniqueInput
+    /**
+     * In case the Stream found by the `where` argument doesn't exist, create a new Stream with this data.
+     */
+    create: XOR<StreamCreateInput, StreamUncheckedCreateInput>
+    /**
+     * In case the Stream was found with the provided `where` argument, update it with this data.
+     */
+    update: XOR<StreamUpdateInput, StreamUncheckedUpdateInput>
+  }
+
+  /**
+   * Stream delete
+   */
+  export type StreamDeleteArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the Stream
+     */
+    select?: StreamSelect<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: StreamInclude<ExtArgs> | null
+    /**
+     * Filter which Stream to delete.
+     */
+    where: StreamWhereUniqueInput
+  }
+
+  /**
+   * Stream deleteMany
+   */
+  export type StreamDeleteManyArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Filter which Streams to delete
+     */
+    where?: StreamWhereInput
+  }
+
+  /**
+   * Stream.user
+   */
+  export type Stream$userArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the User
+     */
+    select?: UserSelect<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: UserInclude<ExtArgs> | null
+    where?: UserWhereInput
+  }
+
+  /**
+   * Stream.category
+   */
+  export type Stream$categoryArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the Category
+     */
+    select?: CategorySelect<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: CategoryInclude<ExtArgs> | null
+    where?: CategoryWhereInput
+  }
+
+  /**
+   * Stream without action
+   */
+  export type StreamDefaultArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the Stream
+     */
+    select?: StreamSelect<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: StreamInclude<ExtArgs> | null
   }
 
 
@@ -3295,6 +5511,7 @@ export namespace Prisma {
     updatedAt?: boolean
     tokens?: boolean | User$tokensArgs<ExtArgs>
     socialLinks?: boolean | User$socialLinksArgs<ExtArgs>
+    stream?: boolean | User$streamArgs<ExtArgs>
     _count?: boolean | UserCountOutputTypeDefaultArgs<ExtArgs>
   }, ExtArgs["result"]["user"]>
 
@@ -3337,6 +5554,7 @@ export namespace Prisma {
   export type UserInclude<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
     tokens?: boolean | User$tokensArgs<ExtArgs>
     socialLinks?: boolean | User$socialLinksArgs<ExtArgs>
+    stream?: boolean | User$streamArgs<ExtArgs>
     _count?: boolean | UserCountOutputTypeDefaultArgs<ExtArgs>
   }
   export type UserIncludeCreateManyAndReturn<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {}
@@ -3346,6 +5564,7 @@ export namespace Prisma {
     objects: {
       tokens: Prisma.$TokenPayload<ExtArgs>[]
       socialLinks: Prisma.$SocialLinkPayload<ExtArgs>[]
+      stream: Prisma.$StreamPayload<ExtArgs> | null
     }
     scalars: $Extensions.GetPayloadResult<{
       id: string
@@ -3729,6 +5948,7 @@ export namespace Prisma {
     readonly [Symbol.toStringTag]: "PrismaPromise"
     tokens<T extends User$tokensArgs<ExtArgs> = {}>(args?: Subset<T, User$tokensArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$TokenPayload<ExtArgs>, T, "findMany"> | Null>
     socialLinks<T extends User$socialLinksArgs<ExtArgs> = {}>(args?: Subset<T, User$socialLinksArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$SocialLinkPayload<ExtArgs>, T, "findMany"> | Null>
+    stream<T extends User$streamArgs<ExtArgs> = {}>(args?: Subset<T, User$streamArgs<ExtArgs>>): Prisma__StreamClient<$Result.GetResult<Prisma.$StreamPayload<ExtArgs>, T, "findUniqueOrThrow"> | null, null, ExtArgs>
     /**
      * Attaches callbacks for the resolution and/or rejection of the Promise.
      * @param onfulfilled The callback to execute when the Promise is resolved.
@@ -4127,6 +6347,21 @@ export namespace Prisma {
   }
 
   /**
+   * User.stream
+   */
+  export type User$streamArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the Stream
+     */
+    select?: StreamSelect<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: StreamInclude<ExtArgs> | null
+    where?: StreamWhereInput
+  }
+
+  /**
    * User without action
    */
   export type UserDefaultArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
@@ -4155,6 +6390,19 @@ export namespace Prisma {
   export type TransactionIsolationLevel = (typeof TransactionIsolationLevel)[keyof typeof TransactionIsolationLevel]
 
 
+  export const CategoryScalarFieldEnum: {
+    id: 'id',
+    title: 'title',
+    slug: 'slug',
+    description: 'description',
+    thumbnailUrl: 'thumbnailUrl',
+    createdAt: 'createdAt',
+    updatedAt: 'updatedAt'
+  };
+
+  export type CategoryScalarFieldEnum = (typeof CategoryScalarFieldEnum)[keyof typeof CategoryScalarFieldEnum]
+
+
   export const SocialLinkScalarFieldEnum: {
     id: 'id',
     title: 'title',
@@ -4166,6 +6414,23 @@ export namespace Prisma {
   };
 
   export type SocialLinkScalarFieldEnum = (typeof SocialLinkScalarFieldEnum)[keyof typeof SocialLinkScalarFieldEnum]
+
+
+  export const StreamScalarFieldEnum: {
+    id: 'id',
+    title: 'title',
+    thumbnailUrl: 'thumbnailUrl',
+    ingressId: 'ingressId',
+    serverUrl: 'serverUrl',
+    streamKey: 'streamKey',
+    isLive: 'isLive',
+    userId: 'userId',
+    categoryId: 'categoryId',
+    createdAt: 'createdAt',
+    updatedAt: 'updatedAt'
+  };
+
+  export type StreamScalarFieldEnum = (typeof StreamScalarFieldEnum)[keyof typeof StreamScalarFieldEnum]
 
 
   export const TokenScalarFieldEnum: {
@@ -4246,20 +6511,6 @@ export namespace Prisma {
 
 
   /**
-   * Reference to a field of type 'Int'
-   */
-  export type IntFieldRefInput<$PrismaModel> = FieldRefInputType<$PrismaModel, 'Int'>
-    
-
-
-  /**
-   * Reference to a field of type 'Int[]'
-   */
-  export type ListIntFieldRefInput<$PrismaModel> = FieldRefInputType<$PrismaModel, 'Int[]'>
-    
-
-
-  /**
    * Reference to a field of type 'DateTime'
    */
   export type DateTimeFieldRefInput<$PrismaModel> = FieldRefInputType<$PrismaModel, 'DateTime'>
@@ -4274,6 +6525,27 @@ export namespace Prisma {
 
 
   /**
+   * Reference to a field of type 'Int'
+   */
+  export type IntFieldRefInput<$PrismaModel> = FieldRefInputType<$PrismaModel, 'Int'>
+    
+
+
+  /**
+   * Reference to a field of type 'Int[]'
+   */
+  export type ListIntFieldRefInput<$PrismaModel> = FieldRefInputType<$PrismaModel, 'Int[]'>
+    
+
+
+  /**
+   * Reference to a field of type 'Boolean'
+   */
+  export type BooleanFieldRefInput<$PrismaModel> = FieldRefInputType<$PrismaModel, 'Boolean'>
+    
+
+
+  /**
    * Reference to a field of type 'TokenType'
    */
   export type EnumTokenTypeFieldRefInput<$PrismaModel> = FieldRefInputType<$PrismaModel, 'TokenType'>
@@ -4284,13 +6556,6 @@ export namespace Prisma {
    * Reference to a field of type 'TokenType[]'
    */
   export type ListEnumTokenTypeFieldRefInput<$PrismaModel> = FieldRefInputType<$PrismaModel, 'TokenType[]'>
-    
-
-
-  /**
-   * Reference to a field of type 'Boolean'
-   */
-  export type BooleanFieldRefInput<$PrismaModel> = FieldRefInputType<$PrismaModel, 'Boolean'>
     
 
 
@@ -4310,6 +6575,71 @@ export namespace Prisma {
    * Deep Input Types
    */
 
+
+  export type CategoryWhereInput = {
+    AND?: CategoryWhereInput | CategoryWhereInput[]
+    OR?: CategoryWhereInput[]
+    NOT?: CategoryWhereInput | CategoryWhereInput[]
+    id?: StringFilter<"Category"> | string
+    title?: StringFilter<"Category"> | string
+    slug?: StringFilter<"Category"> | string
+    description?: StringNullableFilter<"Category"> | string | null
+    thumbnailUrl?: StringFilter<"Category"> | string
+    createdAt?: DateTimeFilter<"Category"> | Date | string
+    updatedAt?: DateTimeFilter<"Category"> | Date | string
+    streams?: StreamListRelationFilter
+  }
+
+  export type CategoryOrderByWithRelationInput = {
+    id?: SortOrder
+    title?: SortOrder
+    slug?: SortOrder
+    description?: SortOrderInput | SortOrder
+    thumbnailUrl?: SortOrder
+    createdAt?: SortOrder
+    updatedAt?: SortOrder
+    streams?: StreamOrderByRelationAggregateInput
+  }
+
+  export type CategoryWhereUniqueInput = Prisma.AtLeast<{
+    id?: string
+    slug?: string
+    AND?: CategoryWhereInput | CategoryWhereInput[]
+    OR?: CategoryWhereInput[]
+    NOT?: CategoryWhereInput | CategoryWhereInput[]
+    title?: StringFilter<"Category"> | string
+    description?: StringNullableFilter<"Category"> | string | null
+    thumbnailUrl?: StringFilter<"Category"> | string
+    createdAt?: DateTimeFilter<"Category"> | Date | string
+    updatedAt?: DateTimeFilter<"Category"> | Date | string
+    streams?: StreamListRelationFilter
+  }, "id" | "slug">
+
+  export type CategoryOrderByWithAggregationInput = {
+    id?: SortOrder
+    title?: SortOrder
+    slug?: SortOrder
+    description?: SortOrderInput | SortOrder
+    thumbnailUrl?: SortOrder
+    createdAt?: SortOrder
+    updatedAt?: SortOrder
+    _count?: CategoryCountOrderByAggregateInput
+    _max?: CategoryMaxOrderByAggregateInput
+    _min?: CategoryMinOrderByAggregateInput
+  }
+
+  export type CategoryScalarWhereWithAggregatesInput = {
+    AND?: CategoryScalarWhereWithAggregatesInput | CategoryScalarWhereWithAggregatesInput[]
+    OR?: CategoryScalarWhereWithAggregatesInput[]
+    NOT?: CategoryScalarWhereWithAggregatesInput | CategoryScalarWhereWithAggregatesInput[]
+    id?: StringWithAggregatesFilter<"Category"> | string
+    title?: StringWithAggregatesFilter<"Category"> | string
+    slug?: StringWithAggregatesFilter<"Category"> | string
+    description?: StringNullableWithAggregatesFilter<"Category"> | string | null
+    thumbnailUrl?: StringWithAggregatesFilter<"Category"> | string
+    createdAt?: DateTimeWithAggregatesFilter<"Category"> | Date | string
+    updatedAt?: DateTimeWithAggregatesFilter<"Category"> | Date | string
+  }
 
   export type SocialLinkWhereInput = {
     AND?: SocialLinkWhereInput | SocialLinkWhereInput[]
@@ -4376,6 +6706,94 @@ export namespace Prisma {
     userId?: StringNullableWithAggregatesFilter<"SocialLink"> | string | null
     createdAt?: DateTimeWithAggregatesFilter<"SocialLink"> | Date | string
     updatedAt?: DateTimeWithAggregatesFilter<"SocialLink"> | Date | string
+  }
+
+  export type StreamWhereInput = {
+    AND?: StreamWhereInput | StreamWhereInput[]
+    OR?: StreamWhereInput[]
+    NOT?: StreamWhereInput | StreamWhereInput[]
+    id?: StringFilter<"Stream"> | string
+    title?: StringFilter<"Stream"> | string
+    thumbnailUrl?: StringNullableFilter<"Stream"> | string | null
+    ingressId?: StringNullableFilter<"Stream"> | string | null
+    serverUrl?: StringNullableFilter<"Stream"> | string | null
+    streamKey?: StringNullableFilter<"Stream"> | string | null
+    isLive?: BoolFilter<"Stream"> | boolean
+    userId?: StringNullableFilter<"Stream"> | string | null
+    categoryId?: StringNullableFilter<"Stream"> | string | null
+    createdAt?: DateTimeFilter<"Stream"> | Date | string
+    updatedAt?: DateTimeFilter<"Stream"> | Date | string
+    user?: XOR<UserNullableScalarRelationFilter, UserWhereInput> | null
+    category?: XOR<CategoryNullableScalarRelationFilter, CategoryWhereInput> | null
+  }
+
+  export type StreamOrderByWithRelationInput = {
+    id?: SortOrder
+    title?: SortOrder
+    thumbnailUrl?: SortOrderInput | SortOrder
+    ingressId?: SortOrderInput | SortOrder
+    serverUrl?: SortOrderInput | SortOrder
+    streamKey?: SortOrderInput | SortOrder
+    isLive?: SortOrder
+    userId?: SortOrderInput | SortOrder
+    categoryId?: SortOrderInput | SortOrder
+    createdAt?: SortOrder
+    updatedAt?: SortOrder
+    user?: UserOrderByWithRelationInput
+    category?: CategoryOrderByWithRelationInput
+  }
+
+  export type StreamWhereUniqueInput = Prisma.AtLeast<{
+    id?: string
+    ingressId?: string
+    userId?: string
+    AND?: StreamWhereInput | StreamWhereInput[]
+    OR?: StreamWhereInput[]
+    NOT?: StreamWhereInput | StreamWhereInput[]
+    title?: StringFilter<"Stream"> | string
+    thumbnailUrl?: StringNullableFilter<"Stream"> | string | null
+    serverUrl?: StringNullableFilter<"Stream"> | string | null
+    streamKey?: StringNullableFilter<"Stream"> | string | null
+    isLive?: BoolFilter<"Stream"> | boolean
+    categoryId?: StringNullableFilter<"Stream"> | string | null
+    createdAt?: DateTimeFilter<"Stream"> | Date | string
+    updatedAt?: DateTimeFilter<"Stream"> | Date | string
+    user?: XOR<UserNullableScalarRelationFilter, UserWhereInput> | null
+    category?: XOR<CategoryNullableScalarRelationFilter, CategoryWhereInput> | null
+  }, "id" | "ingressId" | "userId">
+
+  export type StreamOrderByWithAggregationInput = {
+    id?: SortOrder
+    title?: SortOrder
+    thumbnailUrl?: SortOrderInput | SortOrder
+    ingressId?: SortOrderInput | SortOrder
+    serverUrl?: SortOrderInput | SortOrder
+    streamKey?: SortOrderInput | SortOrder
+    isLive?: SortOrder
+    userId?: SortOrderInput | SortOrder
+    categoryId?: SortOrderInput | SortOrder
+    createdAt?: SortOrder
+    updatedAt?: SortOrder
+    _count?: StreamCountOrderByAggregateInput
+    _max?: StreamMaxOrderByAggregateInput
+    _min?: StreamMinOrderByAggregateInput
+  }
+
+  export type StreamScalarWhereWithAggregatesInput = {
+    AND?: StreamScalarWhereWithAggregatesInput | StreamScalarWhereWithAggregatesInput[]
+    OR?: StreamScalarWhereWithAggregatesInput[]
+    NOT?: StreamScalarWhereWithAggregatesInput | StreamScalarWhereWithAggregatesInput[]
+    id?: StringWithAggregatesFilter<"Stream"> | string
+    title?: StringWithAggregatesFilter<"Stream"> | string
+    thumbnailUrl?: StringNullableWithAggregatesFilter<"Stream"> | string | null
+    ingressId?: StringNullableWithAggregatesFilter<"Stream"> | string | null
+    serverUrl?: StringNullableWithAggregatesFilter<"Stream"> | string | null
+    streamKey?: StringNullableWithAggregatesFilter<"Stream"> | string | null
+    isLive?: BoolWithAggregatesFilter<"Stream"> | boolean
+    userId?: StringNullableWithAggregatesFilter<"Stream"> | string | null
+    categoryId?: StringNullableWithAggregatesFilter<"Stream"> | string | null
+    createdAt?: DateTimeWithAggregatesFilter<"Stream"> | Date | string
+    updatedAt?: DateTimeWithAggregatesFilter<"Stream"> | Date | string
   }
 
   export type TokenWhereInput = {
@@ -4464,6 +6882,7 @@ export namespace Prisma {
     updatedAt?: DateTimeFilter<"User"> | Date | string
     tokens?: TokenListRelationFilter
     socialLinks?: SocialLinkListRelationFilter
+    stream?: XOR<StreamNullableScalarRelationFilter, StreamWhereInput> | null
   }
 
   export type UserOrderByWithRelationInput = {
@@ -4484,6 +6903,7 @@ export namespace Prisma {
     updatedAt?: SortOrder
     tokens?: TokenOrderByRelationAggregateInput
     socialLinks?: SocialLinkOrderByRelationAggregateInput
+    stream?: StreamOrderByWithRelationInput
   }
 
   export type UserWhereUniqueInput = Prisma.AtLeast<{
@@ -4507,6 +6927,7 @@ export namespace Prisma {
     updatedAt?: DateTimeFilter<"User"> | Date | string
     tokens?: TokenListRelationFilter
     socialLinks?: SocialLinkListRelationFilter
+    stream?: XOR<StreamNullableScalarRelationFilter, StreamWhereInput> | null
   }, "id" | "email" | "username">
 
   export type UserOrderByWithAggregationInput = {
@@ -4549,6 +6970,80 @@ export namespace Prisma {
     deactivatedAt?: DateTimeNullableWithAggregatesFilter<"User"> | Date | string | null
     createdAt?: DateTimeWithAggregatesFilter<"User"> | Date | string
     updatedAt?: DateTimeWithAggregatesFilter<"User"> | Date | string
+  }
+
+  export type CategoryCreateInput = {
+    id?: string
+    title: string
+    slug: string
+    description?: string | null
+    thumbnailUrl: string
+    createdAt?: Date | string
+    updatedAt?: Date | string
+    streams?: StreamCreateNestedManyWithoutCategoryInput
+  }
+
+  export type CategoryUncheckedCreateInput = {
+    id?: string
+    title: string
+    slug: string
+    description?: string | null
+    thumbnailUrl: string
+    createdAt?: Date | string
+    updatedAt?: Date | string
+    streams?: StreamUncheckedCreateNestedManyWithoutCategoryInput
+  }
+
+  export type CategoryUpdateInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    title?: StringFieldUpdateOperationsInput | string
+    slug?: StringFieldUpdateOperationsInput | string
+    description?: NullableStringFieldUpdateOperationsInput | string | null
+    thumbnailUrl?: StringFieldUpdateOperationsInput | string
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    streams?: StreamUpdateManyWithoutCategoryNestedInput
+  }
+
+  export type CategoryUncheckedUpdateInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    title?: StringFieldUpdateOperationsInput | string
+    slug?: StringFieldUpdateOperationsInput | string
+    description?: NullableStringFieldUpdateOperationsInput | string | null
+    thumbnailUrl?: StringFieldUpdateOperationsInput | string
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    streams?: StreamUncheckedUpdateManyWithoutCategoryNestedInput
+  }
+
+  export type CategoryCreateManyInput = {
+    id?: string
+    title: string
+    slug: string
+    description?: string | null
+    thumbnailUrl: string
+    createdAt?: Date | string
+    updatedAt?: Date | string
+  }
+
+  export type CategoryUpdateManyMutationInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    title?: StringFieldUpdateOperationsInput | string
+    slug?: StringFieldUpdateOperationsInput | string
+    description?: NullableStringFieldUpdateOperationsInput | string | null
+    thumbnailUrl?: StringFieldUpdateOperationsInput | string
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+  }
+
+  export type CategoryUncheckedUpdateManyInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    title?: StringFieldUpdateOperationsInput | string
+    slug?: StringFieldUpdateOperationsInput | string
+    description?: NullableStringFieldUpdateOperationsInput | string | null
+    thumbnailUrl?: StringFieldUpdateOperationsInput | string
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
   }
 
   export type SocialLinkCreateInput = {
@@ -4616,6 +7111,102 @@ export namespace Prisma {
     url?: StringFieldUpdateOperationsInput | string
     position?: IntFieldUpdateOperationsInput | number
     userId?: NullableStringFieldUpdateOperationsInput | string | null
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+  }
+
+  export type StreamCreateInput = {
+    id?: string
+    title: string
+    thumbnailUrl?: string | null
+    ingressId?: string | null
+    serverUrl?: string | null
+    streamKey?: string | null
+    isLive?: boolean
+    createdAt?: Date | string
+    updatedAt?: Date | string
+    user?: UserCreateNestedOneWithoutStreamInput
+    category?: CategoryCreateNestedOneWithoutStreamsInput
+  }
+
+  export type StreamUncheckedCreateInput = {
+    id?: string
+    title: string
+    thumbnailUrl?: string | null
+    ingressId?: string | null
+    serverUrl?: string | null
+    streamKey?: string | null
+    isLive?: boolean
+    userId?: string | null
+    categoryId?: string | null
+    createdAt?: Date | string
+    updatedAt?: Date | string
+  }
+
+  export type StreamUpdateInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    title?: StringFieldUpdateOperationsInput | string
+    thumbnailUrl?: NullableStringFieldUpdateOperationsInput | string | null
+    ingressId?: NullableStringFieldUpdateOperationsInput | string | null
+    serverUrl?: NullableStringFieldUpdateOperationsInput | string | null
+    streamKey?: NullableStringFieldUpdateOperationsInput | string | null
+    isLive?: BoolFieldUpdateOperationsInput | boolean
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    user?: UserUpdateOneWithoutStreamNestedInput
+    category?: CategoryUpdateOneWithoutStreamsNestedInput
+  }
+
+  export type StreamUncheckedUpdateInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    title?: StringFieldUpdateOperationsInput | string
+    thumbnailUrl?: NullableStringFieldUpdateOperationsInput | string | null
+    ingressId?: NullableStringFieldUpdateOperationsInput | string | null
+    serverUrl?: NullableStringFieldUpdateOperationsInput | string | null
+    streamKey?: NullableStringFieldUpdateOperationsInput | string | null
+    isLive?: BoolFieldUpdateOperationsInput | boolean
+    userId?: NullableStringFieldUpdateOperationsInput | string | null
+    categoryId?: NullableStringFieldUpdateOperationsInput | string | null
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+  }
+
+  export type StreamCreateManyInput = {
+    id?: string
+    title: string
+    thumbnailUrl?: string | null
+    ingressId?: string | null
+    serverUrl?: string | null
+    streamKey?: string | null
+    isLive?: boolean
+    userId?: string | null
+    categoryId?: string | null
+    createdAt?: Date | string
+    updatedAt?: Date | string
+  }
+
+  export type StreamUpdateManyMutationInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    title?: StringFieldUpdateOperationsInput | string
+    thumbnailUrl?: NullableStringFieldUpdateOperationsInput | string | null
+    ingressId?: NullableStringFieldUpdateOperationsInput | string | null
+    serverUrl?: NullableStringFieldUpdateOperationsInput | string | null
+    streamKey?: NullableStringFieldUpdateOperationsInput | string | null
+    isLive?: BoolFieldUpdateOperationsInput | boolean
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+  }
+
+  export type StreamUncheckedUpdateManyInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    title?: StringFieldUpdateOperationsInput | string
+    thumbnailUrl?: NullableStringFieldUpdateOperationsInput | string | null
+    ingressId?: NullableStringFieldUpdateOperationsInput | string | null
+    serverUrl?: NullableStringFieldUpdateOperationsInput | string | null
+    streamKey?: NullableStringFieldUpdateOperationsInput | string | null
+    isLive?: BoolFieldUpdateOperationsInput | boolean
+    userId?: NullableStringFieldUpdateOperationsInput | string | null
+    categoryId?: NullableStringFieldUpdateOperationsInput | string | null
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
   }
@@ -4707,6 +7298,7 @@ export namespace Prisma {
     updatedAt?: Date | string
     tokens?: TokenCreateNestedManyWithoutUserInput
     socialLinks?: SocialLinkCreateNestedManyWithoutUserInput
+    stream?: StreamCreateNestedOneWithoutUserInput
   }
 
   export type UserUncheckedCreateInput = {
@@ -4727,6 +7319,7 @@ export namespace Prisma {
     updatedAt?: Date | string
     tokens?: TokenUncheckedCreateNestedManyWithoutUserInput
     socialLinks?: SocialLinkUncheckedCreateNestedManyWithoutUserInput
+    stream?: StreamUncheckedCreateNestedOneWithoutUserInput
   }
 
   export type UserUpdateInput = {
@@ -4747,6 +7340,7 @@ export namespace Prisma {
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
     tokens?: TokenUpdateManyWithoutUserNestedInput
     socialLinks?: SocialLinkUpdateManyWithoutUserNestedInput
+    stream?: StreamUpdateOneWithoutUserNestedInput
   }
 
   export type UserUncheckedUpdateInput = {
@@ -4767,6 +7361,7 @@ export namespace Prisma {
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
     tokens?: TokenUncheckedUpdateManyWithoutUserNestedInput
     socialLinks?: SocialLinkUncheckedUpdateManyWithoutUserNestedInput
+    stream?: StreamUncheckedUpdateOneWithoutUserNestedInput
   }
 
   export type UserCreateManyInput = {
@@ -4838,17 +7433,6 @@ export namespace Prisma {
     not?: NestedStringFilter<$PrismaModel> | string
   }
 
-  export type IntFilter<$PrismaModel = never> = {
-    equals?: number | IntFieldRefInput<$PrismaModel>
-    in?: number[] | ListIntFieldRefInput<$PrismaModel>
-    notIn?: number[] | ListIntFieldRefInput<$PrismaModel>
-    lt?: number | IntFieldRefInput<$PrismaModel>
-    lte?: number | IntFieldRefInput<$PrismaModel>
-    gt?: number | IntFieldRefInput<$PrismaModel>
-    gte?: number | IntFieldRefInput<$PrismaModel>
-    not?: NestedIntFilter<$PrismaModel> | number
-  }
-
   export type StringNullableFilter<$PrismaModel = never> = {
     equals?: string | StringFieldRefInput<$PrismaModel> | null
     in?: string[] | ListStringFieldRefInput<$PrismaModel> | null
@@ -4875,14 +7459,115 @@ export namespace Prisma {
     not?: NestedDateTimeFilter<$PrismaModel> | Date | string
   }
 
-  export type UserNullableScalarRelationFilter = {
-    is?: UserWhereInput | null
-    isNot?: UserWhereInput | null
+  export type StreamListRelationFilter = {
+    every?: StreamWhereInput
+    some?: StreamWhereInput
+    none?: StreamWhereInput
   }
 
   export type SortOrderInput = {
     sort: SortOrder
     nulls?: NullsOrder
+  }
+
+  export type StreamOrderByRelationAggregateInput = {
+    _count?: SortOrder
+  }
+
+  export type CategoryCountOrderByAggregateInput = {
+    id?: SortOrder
+    title?: SortOrder
+    slug?: SortOrder
+    description?: SortOrder
+    thumbnailUrl?: SortOrder
+    createdAt?: SortOrder
+    updatedAt?: SortOrder
+  }
+
+  export type CategoryMaxOrderByAggregateInput = {
+    id?: SortOrder
+    title?: SortOrder
+    slug?: SortOrder
+    description?: SortOrder
+    thumbnailUrl?: SortOrder
+    createdAt?: SortOrder
+    updatedAt?: SortOrder
+  }
+
+  export type CategoryMinOrderByAggregateInput = {
+    id?: SortOrder
+    title?: SortOrder
+    slug?: SortOrder
+    description?: SortOrder
+    thumbnailUrl?: SortOrder
+    createdAt?: SortOrder
+    updatedAt?: SortOrder
+  }
+
+  export type StringWithAggregatesFilter<$PrismaModel = never> = {
+    equals?: string | StringFieldRefInput<$PrismaModel>
+    in?: string[] | ListStringFieldRefInput<$PrismaModel>
+    notIn?: string[] | ListStringFieldRefInput<$PrismaModel>
+    lt?: string | StringFieldRefInput<$PrismaModel>
+    lte?: string | StringFieldRefInput<$PrismaModel>
+    gt?: string | StringFieldRefInput<$PrismaModel>
+    gte?: string | StringFieldRefInput<$PrismaModel>
+    contains?: string | StringFieldRefInput<$PrismaModel>
+    startsWith?: string | StringFieldRefInput<$PrismaModel>
+    endsWith?: string | StringFieldRefInput<$PrismaModel>
+    mode?: QueryMode
+    not?: NestedStringWithAggregatesFilter<$PrismaModel> | string
+    _count?: NestedIntFilter<$PrismaModel>
+    _min?: NestedStringFilter<$PrismaModel>
+    _max?: NestedStringFilter<$PrismaModel>
+  }
+
+  export type StringNullableWithAggregatesFilter<$PrismaModel = never> = {
+    equals?: string | StringFieldRefInput<$PrismaModel> | null
+    in?: string[] | ListStringFieldRefInput<$PrismaModel> | null
+    notIn?: string[] | ListStringFieldRefInput<$PrismaModel> | null
+    lt?: string | StringFieldRefInput<$PrismaModel>
+    lte?: string | StringFieldRefInput<$PrismaModel>
+    gt?: string | StringFieldRefInput<$PrismaModel>
+    gte?: string | StringFieldRefInput<$PrismaModel>
+    contains?: string | StringFieldRefInput<$PrismaModel>
+    startsWith?: string | StringFieldRefInput<$PrismaModel>
+    endsWith?: string | StringFieldRefInput<$PrismaModel>
+    mode?: QueryMode
+    not?: NestedStringNullableWithAggregatesFilter<$PrismaModel> | string | null
+    _count?: NestedIntNullableFilter<$PrismaModel>
+    _min?: NestedStringNullableFilter<$PrismaModel>
+    _max?: NestedStringNullableFilter<$PrismaModel>
+  }
+
+  export type DateTimeWithAggregatesFilter<$PrismaModel = never> = {
+    equals?: Date | string | DateTimeFieldRefInput<$PrismaModel>
+    in?: Date[] | string[] | ListDateTimeFieldRefInput<$PrismaModel>
+    notIn?: Date[] | string[] | ListDateTimeFieldRefInput<$PrismaModel>
+    lt?: Date | string | DateTimeFieldRefInput<$PrismaModel>
+    lte?: Date | string | DateTimeFieldRefInput<$PrismaModel>
+    gt?: Date | string | DateTimeFieldRefInput<$PrismaModel>
+    gte?: Date | string | DateTimeFieldRefInput<$PrismaModel>
+    not?: NestedDateTimeWithAggregatesFilter<$PrismaModel> | Date | string
+    _count?: NestedIntFilter<$PrismaModel>
+    _min?: NestedDateTimeFilter<$PrismaModel>
+    _max?: NestedDateTimeFilter<$PrismaModel>
+  }
+
+  export type IntFilter<$PrismaModel = never> = {
+    equals?: number | IntFieldRefInput<$PrismaModel>
+    in?: number[] | ListIntFieldRefInput<$PrismaModel>
+    notIn?: number[] | ListIntFieldRefInput<$PrismaModel>
+    lt?: number | IntFieldRefInput<$PrismaModel>
+    lte?: number | IntFieldRefInput<$PrismaModel>
+    gt?: number | IntFieldRefInput<$PrismaModel>
+    gte?: number | IntFieldRefInput<$PrismaModel>
+    not?: NestedIntFilter<$PrismaModel> | number
+  }
+
+  export type UserNullableScalarRelationFilter = {
+    is?: UserWhereInput | null
+    isNot?: UserWhereInput | null
   }
 
   export type SocialLinkCountOrderByAggregateInput = {
@@ -4923,24 +7608,6 @@ export namespace Prisma {
     position?: SortOrder
   }
 
-  export type StringWithAggregatesFilter<$PrismaModel = never> = {
-    equals?: string | StringFieldRefInput<$PrismaModel>
-    in?: string[] | ListStringFieldRefInput<$PrismaModel>
-    notIn?: string[] | ListStringFieldRefInput<$PrismaModel>
-    lt?: string | StringFieldRefInput<$PrismaModel>
-    lte?: string | StringFieldRefInput<$PrismaModel>
-    gt?: string | StringFieldRefInput<$PrismaModel>
-    gte?: string | StringFieldRefInput<$PrismaModel>
-    contains?: string | StringFieldRefInput<$PrismaModel>
-    startsWith?: string | StringFieldRefInput<$PrismaModel>
-    endsWith?: string | StringFieldRefInput<$PrismaModel>
-    mode?: QueryMode
-    not?: NestedStringWithAggregatesFilter<$PrismaModel> | string
-    _count?: NestedIntFilter<$PrismaModel>
-    _min?: NestedStringFilter<$PrismaModel>
-    _max?: NestedStringFilter<$PrismaModel>
-  }
-
   export type IntWithAggregatesFilter<$PrismaModel = never> = {
     equals?: number | IntFieldRefInput<$PrismaModel>
     in?: number[] | ListIntFieldRefInput<$PrismaModel>
@@ -4957,36 +7624,64 @@ export namespace Prisma {
     _max?: NestedIntFilter<$PrismaModel>
   }
 
-  export type StringNullableWithAggregatesFilter<$PrismaModel = never> = {
-    equals?: string | StringFieldRefInput<$PrismaModel> | null
-    in?: string[] | ListStringFieldRefInput<$PrismaModel> | null
-    notIn?: string[] | ListStringFieldRefInput<$PrismaModel> | null
-    lt?: string | StringFieldRefInput<$PrismaModel>
-    lte?: string | StringFieldRefInput<$PrismaModel>
-    gt?: string | StringFieldRefInput<$PrismaModel>
-    gte?: string | StringFieldRefInput<$PrismaModel>
-    contains?: string | StringFieldRefInput<$PrismaModel>
-    startsWith?: string | StringFieldRefInput<$PrismaModel>
-    endsWith?: string | StringFieldRefInput<$PrismaModel>
-    mode?: QueryMode
-    not?: NestedStringNullableWithAggregatesFilter<$PrismaModel> | string | null
-    _count?: NestedIntNullableFilter<$PrismaModel>
-    _min?: NestedStringNullableFilter<$PrismaModel>
-    _max?: NestedStringNullableFilter<$PrismaModel>
+  export type BoolFilter<$PrismaModel = never> = {
+    equals?: boolean | BooleanFieldRefInput<$PrismaModel>
+    not?: NestedBoolFilter<$PrismaModel> | boolean
   }
 
-  export type DateTimeWithAggregatesFilter<$PrismaModel = never> = {
-    equals?: Date | string | DateTimeFieldRefInput<$PrismaModel>
-    in?: Date[] | string[] | ListDateTimeFieldRefInput<$PrismaModel>
-    notIn?: Date[] | string[] | ListDateTimeFieldRefInput<$PrismaModel>
-    lt?: Date | string | DateTimeFieldRefInput<$PrismaModel>
-    lte?: Date | string | DateTimeFieldRefInput<$PrismaModel>
-    gt?: Date | string | DateTimeFieldRefInput<$PrismaModel>
-    gte?: Date | string | DateTimeFieldRefInput<$PrismaModel>
-    not?: NestedDateTimeWithAggregatesFilter<$PrismaModel> | Date | string
+  export type CategoryNullableScalarRelationFilter = {
+    is?: CategoryWhereInput | null
+    isNot?: CategoryWhereInput | null
+  }
+
+  export type StreamCountOrderByAggregateInput = {
+    id?: SortOrder
+    title?: SortOrder
+    thumbnailUrl?: SortOrder
+    ingressId?: SortOrder
+    serverUrl?: SortOrder
+    streamKey?: SortOrder
+    isLive?: SortOrder
+    userId?: SortOrder
+    categoryId?: SortOrder
+    createdAt?: SortOrder
+    updatedAt?: SortOrder
+  }
+
+  export type StreamMaxOrderByAggregateInput = {
+    id?: SortOrder
+    title?: SortOrder
+    thumbnailUrl?: SortOrder
+    ingressId?: SortOrder
+    serverUrl?: SortOrder
+    streamKey?: SortOrder
+    isLive?: SortOrder
+    userId?: SortOrder
+    categoryId?: SortOrder
+    createdAt?: SortOrder
+    updatedAt?: SortOrder
+  }
+
+  export type StreamMinOrderByAggregateInput = {
+    id?: SortOrder
+    title?: SortOrder
+    thumbnailUrl?: SortOrder
+    ingressId?: SortOrder
+    serverUrl?: SortOrder
+    streamKey?: SortOrder
+    isLive?: SortOrder
+    userId?: SortOrder
+    categoryId?: SortOrder
+    createdAt?: SortOrder
+    updatedAt?: SortOrder
+  }
+
+  export type BoolWithAggregatesFilter<$PrismaModel = never> = {
+    equals?: boolean | BooleanFieldRefInput<$PrismaModel>
+    not?: NestedBoolWithAggregatesFilter<$PrismaModel> | boolean
     _count?: NestedIntFilter<$PrismaModel>
-    _min?: NestedDateTimeFilter<$PrismaModel>
-    _max?: NestedDateTimeFilter<$PrismaModel>
+    _min?: NestedBoolFilter<$PrismaModel>
+    _max?: NestedBoolFilter<$PrismaModel>
   }
 
   export type EnumTokenTypeFilter<$PrismaModel = never> = {
@@ -5036,11 +7731,6 @@ export namespace Prisma {
     _max?: NestedEnumTokenTypeFilter<$PrismaModel>
   }
 
-  export type BoolFilter<$PrismaModel = never> = {
-    equals?: boolean | BooleanFieldRefInput<$PrismaModel>
-    not?: NestedBoolFilter<$PrismaModel> | boolean
-  }
-
   export type DateTimeNullableFilter<$PrismaModel = never> = {
     equals?: Date | string | DateTimeFieldRefInput<$PrismaModel> | null
     in?: Date[] | string[] | ListDateTimeFieldRefInput<$PrismaModel> | null
@@ -5062,6 +7752,11 @@ export namespace Prisma {
     every?: SocialLinkWhereInput
     some?: SocialLinkWhereInput
     none?: SocialLinkWhereInput
+  }
+
+  export type StreamNullableScalarRelationFilter = {
+    is?: StreamWhereInput | null
+    isNot?: StreamWhereInput | null
   }
 
   export type TokenOrderByRelationAggregateInput = {
@@ -5126,14 +7821,6 @@ export namespace Prisma {
     updatedAt?: SortOrder
   }
 
-  export type BoolWithAggregatesFilter<$PrismaModel = never> = {
-    equals?: boolean | BooleanFieldRefInput<$PrismaModel>
-    not?: NestedBoolWithAggregatesFilter<$PrismaModel> | boolean
-    _count?: NestedIntFilter<$PrismaModel>
-    _min?: NestedBoolFilter<$PrismaModel>
-    _max?: NestedBoolFilter<$PrismaModel>
-  }
-
   export type DateTimeNullableWithAggregatesFilter<$PrismaModel = never> = {
     equals?: Date | string | DateTimeFieldRefInput<$PrismaModel> | null
     in?: Date[] | string[] | ListDateTimeFieldRefInput<$PrismaModel> | null
@@ -5148,14 +7835,64 @@ export namespace Prisma {
     _max?: NestedDateTimeNullableFilter<$PrismaModel>
   }
 
-  export type UserCreateNestedOneWithoutSocialLinksInput = {
-    create?: XOR<UserCreateWithoutSocialLinksInput, UserUncheckedCreateWithoutSocialLinksInput>
-    connectOrCreate?: UserCreateOrConnectWithoutSocialLinksInput
-    connect?: UserWhereUniqueInput
+  export type StreamCreateNestedManyWithoutCategoryInput = {
+    create?: XOR<StreamCreateWithoutCategoryInput, StreamUncheckedCreateWithoutCategoryInput> | StreamCreateWithoutCategoryInput[] | StreamUncheckedCreateWithoutCategoryInput[]
+    connectOrCreate?: StreamCreateOrConnectWithoutCategoryInput | StreamCreateOrConnectWithoutCategoryInput[]
+    createMany?: StreamCreateManyCategoryInputEnvelope
+    connect?: StreamWhereUniqueInput | StreamWhereUniqueInput[]
+  }
+
+  export type StreamUncheckedCreateNestedManyWithoutCategoryInput = {
+    create?: XOR<StreamCreateWithoutCategoryInput, StreamUncheckedCreateWithoutCategoryInput> | StreamCreateWithoutCategoryInput[] | StreamUncheckedCreateWithoutCategoryInput[]
+    connectOrCreate?: StreamCreateOrConnectWithoutCategoryInput | StreamCreateOrConnectWithoutCategoryInput[]
+    createMany?: StreamCreateManyCategoryInputEnvelope
+    connect?: StreamWhereUniqueInput | StreamWhereUniqueInput[]
   }
 
   export type StringFieldUpdateOperationsInput = {
     set?: string
+  }
+
+  export type NullableStringFieldUpdateOperationsInput = {
+    set?: string | null
+  }
+
+  export type DateTimeFieldUpdateOperationsInput = {
+    set?: Date | string
+  }
+
+  export type StreamUpdateManyWithoutCategoryNestedInput = {
+    create?: XOR<StreamCreateWithoutCategoryInput, StreamUncheckedCreateWithoutCategoryInput> | StreamCreateWithoutCategoryInput[] | StreamUncheckedCreateWithoutCategoryInput[]
+    connectOrCreate?: StreamCreateOrConnectWithoutCategoryInput | StreamCreateOrConnectWithoutCategoryInput[]
+    upsert?: StreamUpsertWithWhereUniqueWithoutCategoryInput | StreamUpsertWithWhereUniqueWithoutCategoryInput[]
+    createMany?: StreamCreateManyCategoryInputEnvelope
+    set?: StreamWhereUniqueInput | StreamWhereUniqueInput[]
+    disconnect?: StreamWhereUniqueInput | StreamWhereUniqueInput[]
+    delete?: StreamWhereUniqueInput | StreamWhereUniqueInput[]
+    connect?: StreamWhereUniqueInput | StreamWhereUniqueInput[]
+    update?: StreamUpdateWithWhereUniqueWithoutCategoryInput | StreamUpdateWithWhereUniqueWithoutCategoryInput[]
+    updateMany?: StreamUpdateManyWithWhereWithoutCategoryInput | StreamUpdateManyWithWhereWithoutCategoryInput[]
+    deleteMany?: StreamScalarWhereInput | StreamScalarWhereInput[]
+  }
+
+  export type StreamUncheckedUpdateManyWithoutCategoryNestedInput = {
+    create?: XOR<StreamCreateWithoutCategoryInput, StreamUncheckedCreateWithoutCategoryInput> | StreamCreateWithoutCategoryInput[] | StreamUncheckedCreateWithoutCategoryInput[]
+    connectOrCreate?: StreamCreateOrConnectWithoutCategoryInput | StreamCreateOrConnectWithoutCategoryInput[]
+    upsert?: StreamUpsertWithWhereUniqueWithoutCategoryInput | StreamUpsertWithWhereUniqueWithoutCategoryInput[]
+    createMany?: StreamCreateManyCategoryInputEnvelope
+    set?: StreamWhereUniqueInput | StreamWhereUniqueInput[]
+    disconnect?: StreamWhereUniqueInput | StreamWhereUniqueInput[]
+    delete?: StreamWhereUniqueInput | StreamWhereUniqueInput[]
+    connect?: StreamWhereUniqueInput | StreamWhereUniqueInput[]
+    update?: StreamUpdateWithWhereUniqueWithoutCategoryInput | StreamUpdateWithWhereUniqueWithoutCategoryInput[]
+    updateMany?: StreamUpdateManyWithWhereWithoutCategoryInput | StreamUpdateManyWithWhereWithoutCategoryInput[]
+    deleteMany?: StreamScalarWhereInput | StreamScalarWhereInput[]
+  }
+
+  export type UserCreateNestedOneWithoutSocialLinksInput = {
+    create?: XOR<UserCreateWithoutSocialLinksInput, UserUncheckedCreateWithoutSocialLinksInput>
+    connectOrCreate?: UserCreateOrConnectWithoutSocialLinksInput
+    connect?: UserWhereUniqueInput
   }
 
   export type IntFieldUpdateOperationsInput = {
@@ -5164,10 +7901,6 @@ export namespace Prisma {
     decrement?: number
     multiply?: number
     divide?: number
-  }
-
-  export type DateTimeFieldUpdateOperationsInput = {
-    set?: Date | string
   }
 
   export type UserUpdateOneWithoutSocialLinksNestedInput = {
@@ -5180,8 +7913,40 @@ export namespace Prisma {
     update?: XOR<XOR<UserUpdateToOneWithWhereWithoutSocialLinksInput, UserUpdateWithoutSocialLinksInput>, UserUncheckedUpdateWithoutSocialLinksInput>
   }
 
-  export type NullableStringFieldUpdateOperationsInput = {
-    set?: string | null
+  export type UserCreateNestedOneWithoutStreamInput = {
+    create?: XOR<UserCreateWithoutStreamInput, UserUncheckedCreateWithoutStreamInput>
+    connectOrCreate?: UserCreateOrConnectWithoutStreamInput
+    connect?: UserWhereUniqueInput
+  }
+
+  export type CategoryCreateNestedOneWithoutStreamsInput = {
+    create?: XOR<CategoryCreateWithoutStreamsInput, CategoryUncheckedCreateWithoutStreamsInput>
+    connectOrCreate?: CategoryCreateOrConnectWithoutStreamsInput
+    connect?: CategoryWhereUniqueInput
+  }
+
+  export type BoolFieldUpdateOperationsInput = {
+    set?: boolean
+  }
+
+  export type UserUpdateOneWithoutStreamNestedInput = {
+    create?: XOR<UserCreateWithoutStreamInput, UserUncheckedCreateWithoutStreamInput>
+    connectOrCreate?: UserCreateOrConnectWithoutStreamInput
+    upsert?: UserUpsertWithoutStreamInput
+    disconnect?: UserWhereInput | boolean
+    delete?: UserWhereInput | boolean
+    connect?: UserWhereUniqueInput
+    update?: XOR<XOR<UserUpdateToOneWithWhereWithoutStreamInput, UserUpdateWithoutStreamInput>, UserUncheckedUpdateWithoutStreamInput>
+  }
+
+  export type CategoryUpdateOneWithoutStreamsNestedInput = {
+    create?: XOR<CategoryCreateWithoutStreamsInput, CategoryUncheckedCreateWithoutStreamsInput>
+    connectOrCreate?: CategoryCreateOrConnectWithoutStreamsInput
+    upsert?: CategoryUpsertWithoutStreamsInput
+    disconnect?: CategoryWhereInput | boolean
+    delete?: CategoryWhereInput | boolean
+    connect?: CategoryWhereUniqueInput
+    update?: XOR<XOR<CategoryUpdateToOneWithWhereWithoutStreamsInput, CategoryUpdateWithoutStreamsInput>, CategoryUncheckedUpdateWithoutStreamsInput>
   }
 
   export type UserCreateNestedOneWithoutTokensInput = {
@@ -5218,6 +7983,12 @@ export namespace Prisma {
     connect?: SocialLinkWhereUniqueInput | SocialLinkWhereUniqueInput[]
   }
 
+  export type StreamCreateNestedOneWithoutUserInput = {
+    create?: XOR<StreamCreateWithoutUserInput, StreamUncheckedCreateWithoutUserInput>
+    connectOrCreate?: StreamCreateOrConnectWithoutUserInput
+    connect?: StreamWhereUniqueInput
+  }
+
   export type TokenUncheckedCreateNestedManyWithoutUserInput = {
     create?: XOR<TokenCreateWithoutUserInput, TokenUncheckedCreateWithoutUserInput> | TokenCreateWithoutUserInput[] | TokenUncheckedCreateWithoutUserInput[]
     connectOrCreate?: TokenCreateOrConnectWithoutUserInput | TokenCreateOrConnectWithoutUserInput[]
@@ -5232,8 +8003,10 @@ export namespace Prisma {
     connect?: SocialLinkWhereUniqueInput | SocialLinkWhereUniqueInput[]
   }
 
-  export type BoolFieldUpdateOperationsInput = {
-    set?: boolean
+  export type StreamUncheckedCreateNestedOneWithoutUserInput = {
+    create?: XOR<StreamCreateWithoutUserInput, StreamUncheckedCreateWithoutUserInput>
+    connectOrCreate?: StreamCreateOrConnectWithoutUserInput
+    connect?: StreamWhereUniqueInput
   }
 
   export type NullableDateTimeFieldUpdateOperationsInput = {
@@ -5268,6 +8041,16 @@ export namespace Prisma {
     deleteMany?: SocialLinkScalarWhereInput | SocialLinkScalarWhereInput[]
   }
 
+  export type StreamUpdateOneWithoutUserNestedInput = {
+    create?: XOR<StreamCreateWithoutUserInput, StreamUncheckedCreateWithoutUserInput>
+    connectOrCreate?: StreamCreateOrConnectWithoutUserInput
+    upsert?: StreamUpsertWithoutUserInput
+    disconnect?: StreamWhereInput | boolean
+    delete?: StreamWhereInput | boolean
+    connect?: StreamWhereUniqueInput
+    update?: XOR<XOR<StreamUpdateToOneWithWhereWithoutUserInput, StreamUpdateWithoutUserInput>, StreamUncheckedUpdateWithoutUserInput>
+  }
+
   export type TokenUncheckedUpdateManyWithoutUserNestedInput = {
     create?: XOR<TokenCreateWithoutUserInput, TokenUncheckedCreateWithoutUserInput> | TokenCreateWithoutUserInput[] | TokenUncheckedCreateWithoutUserInput[]
     connectOrCreate?: TokenCreateOrConnectWithoutUserInput | TokenCreateOrConnectWithoutUserInput[]
@@ -5296,6 +8079,16 @@ export namespace Prisma {
     deleteMany?: SocialLinkScalarWhereInput | SocialLinkScalarWhereInput[]
   }
 
+  export type StreamUncheckedUpdateOneWithoutUserNestedInput = {
+    create?: XOR<StreamCreateWithoutUserInput, StreamUncheckedCreateWithoutUserInput>
+    connectOrCreate?: StreamCreateOrConnectWithoutUserInput
+    upsert?: StreamUpsertWithoutUserInput
+    disconnect?: StreamWhereInput | boolean
+    delete?: StreamWhereInput | boolean
+    connect?: StreamWhereUniqueInput
+    update?: XOR<XOR<StreamUpdateToOneWithWhereWithoutUserInput, StreamUpdateWithoutUserInput>, StreamUncheckedUpdateWithoutUserInput>
+  }
+
   export type NestedStringFilter<$PrismaModel = never> = {
     equals?: string | StringFieldRefInput<$PrismaModel>
     in?: string[] | ListStringFieldRefInput<$PrismaModel>
@@ -5308,17 +8101,6 @@ export namespace Prisma {
     startsWith?: string | StringFieldRefInput<$PrismaModel>
     endsWith?: string | StringFieldRefInput<$PrismaModel>
     not?: NestedStringFilter<$PrismaModel> | string
-  }
-
-  export type NestedIntFilter<$PrismaModel = never> = {
-    equals?: number | IntFieldRefInput<$PrismaModel>
-    in?: number[] | ListIntFieldRefInput<$PrismaModel>
-    notIn?: number[] | ListIntFieldRefInput<$PrismaModel>
-    lt?: number | IntFieldRefInput<$PrismaModel>
-    lte?: number | IntFieldRefInput<$PrismaModel>
-    gt?: number | IntFieldRefInput<$PrismaModel>
-    gte?: number | IntFieldRefInput<$PrismaModel>
-    not?: NestedIntFilter<$PrismaModel> | number
   }
 
   export type NestedStringNullableFilter<$PrismaModel = never> = {
@@ -5363,7 +8145,7 @@ export namespace Prisma {
     _max?: NestedStringFilter<$PrismaModel>
   }
 
-  export type NestedIntWithAggregatesFilter<$PrismaModel = never> = {
+  export type NestedIntFilter<$PrismaModel = never> = {
     equals?: number | IntFieldRefInput<$PrismaModel>
     in?: number[] | ListIntFieldRefInput<$PrismaModel>
     notIn?: number[] | ListIntFieldRefInput<$PrismaModel>
@@ -5371,23 +8153,7 @@ export namespace Prisma {
     lte?: number | IntFieldRefInput<$PrismaModel>
     gt?: number | IntFieldRefInput<$PrismaModel>
     gte?: number | IntFieldRefInput<$PrismaModel>
-    not?: NestedIntWithAggregatesFilter<$PrismaModel> | number
-    _count?: NestedIntFilter<$PrismaModel>
-    _avg?: NestedFloatFilter<$PrismaModel>
-    _sum?: NestedIntFilter<$PrismaModel>
-    _min?: NestedIntFilter<$PrismaModel>
-    _max?: NestedIntFilter<$PrismaModel>
-  }
-
-  export type NestedFloatFilter<$PrismaModel = never> = {
-    equals?: number | FloatFieldRefInput<$PrismaModel>
-    in?: number[] | ListFloatFieldRefInput<$PrismaModel>
-    notIn?: number[] | ListFloatFieldRefInput<$PrismaModel>
-    lt?: number | FloatFieldRefInput<$PrismaModel>
-    lte?: number | FloatFieldRefInput<$PrismaModel>
-    gt?: number | FloatFieldRefInput<$PrismaModel>
-    gte?: number | FloatFieldRefInput<$PrismaModel>
-    not?: NestedFloatFilter<$PrismaModel> | number
+    not?: NestedIntFilter<$PrismaModel> | number
   }
 
   export type NestedStringNullableWithAggregatesFilter<$PrismaModel = never> = {
@@ -5432,6 +8198,46 @@ export namespace Prisma {
     _max?: NestedDateTimeFilter<$PrismaModel>
   }
 
+  export type NestedIntWithAggregatesFilter<$PrismaModel = never> = {
+    equals?: number | IntFieldRefInput<$PrismaModel>
+    in?: number[] | ListIntFieldRefInput<$PrismaModel>
+    notIn?: number[] | ListIntFieldRefInput<$PrismaModel>
+    lt?: number | IntFieldRefInput<$PrismaModel>
+    lte?: number | IntFieldRefInput<$PrismaModel>
+    gt?: number | IntFieldRefInput<$PrismaModel>
+    gte?: number | IntFieldRefInput<$PrismaModel>
+    not?: NestedIntWithAggregatesFilter<$PrismaModel> | number
+    _count?: NestedIntFilter<$PrismaModel>
+    _avg?: NestedFloatFilter<$PrismaModel>
+    _sum?: NestedIntFilter<$PrismaModel>
+    _min?: NestedIntFilter<$PrismaModel>
+    _max?: NestedIntFilter<$PrismaModel>
+  }
+
+  export type NestedFloatFilter<$PrismaModel = never> = {
+    equals?: number | FloatFieldRefInput<$PrismaModel>
+    in?: number[] | ListFloatFieldRefInput<$PrismaModel>
+    notIn?: number[] | ListFloatFieldRefInput<$PrismaModel>
+    lt?: number | FloatFieldRefInput<$PrismaModel>
+    lte?: number | FloatFieldRefInput<$PrismaModel>
+    gt?: number | FloatFieldRefInput<$PrismaModel>
+    gte?: number | FloatFieldRefInput<$PrismaModel>
+    not?: NestedFloatFilter<$PrismaModel> | number
+  }
+
+  export type NestedBoolFilter<$PrismaModel = never> = {
+    equals?: boolean | BooleanFieldRefInput<$PrismaModel>
+    not?: NestedBoolFilter<$PrismaModel> | boolean
+  }
+
+  export type NestedBoolWithAggregatesFilter<$PrismaModel = never> = {
+    equals?: boolean | BooleanFieldRefInput<$PrismaModel>
+    not?: NestedBoolWithAggregatesFilter<$PrismaModel> | boolean
+    _count?: NestedIntFilter<$PrismaModel>
+    _min?: NestedBoolFilter<$PrismaModel>
+    _max?: NestedBoolFilter<$PrismaModel>
+  }
+
   export type NestedEnumTokenTypeFilter<$PrismaModel = never> = {
     equals?: $Enums.TokenType | EnumTokenTypeFieldRefInput<$PrismaModel>
     in?: $Enums.TokenType[] | ListEnumTokenTypeFieldRefInput<$PrismaModel>
@@ -5449,11 +8255,6 @@ export namespace Prisma {
     _max?: NestedEnumTokenTypeFilter<$PrismaModel>
   }
 
-  export type NestedBoolFilter<$PrismaModel = never> = {
-    equals?: boolean | BooleanFieldRefInput<$PrismaModel>
-    not?: NestedBoolFilter<$PrismaModel> | boolean
-  }
-
   export type NestedDateTimeNullableFilter<$PrismaModel = never> = {
     equals?: Date | string | DateTimeFieldRefInput<$PrismaModel> | null
     in?: Date[] | string[] | ListDateTimeFieldRefInput<$PrismaModel> | null
@@ -5463,14 +8264,6 @@ export namespace Prisma {
     gt?: Date | string | DateTimeFieldRefInput<$PrismaModel>
     gte?: Date | string | DateTimeFieldRefInput<$PrismaModel>
     not?: NestedDateTimeNullableFilter<$PrismaModel> | Date | string | null
-  }
-
-  export type NestedBoolWithAggregatesFilter<$PrismaModel = never> = {
-    equals?: boolean | BooleanFieldRefInput<$PrismaModel>
-    not?: NestedBoolWithAggregatesFilter<$PrismaModel> | boolean
-    _count?: NestedIntFilter<$PrismaModel>
-    _min?: NestedBoolFilter<$PrismaModel>
-    _max?: NestedBoolFilter<$PrismaModel>
   }
 
   export type NestedDateTimeNullableWithAggregatesFilter<$PrismaModel = never> = {
@@ -5485,6 +8278,75 @@ export namespace Prisma {
     _count?: NestedIntNullableFilter<$PrismaModel>
     _min?: NestedDateTimeNullableFilter<$PrismaModel>
     _max?: NestedDateTimeNullableFilter<$PrismaModel>
+  }
+
+  export type StreamCreateWithoutCategoryInput = {
+    id?: string
+    title: string
+    thumbnailUrl?: string | null
+    ingressId?: string | null
+    serverUrl?: string | null
+    streamKey?: string | null
+    isLive?: boolean
+    createdAt?: Date | string
+    updatedAt?: Date | string
+    user?: UserCreateNestedOneWithoutStreamInput
+  }
+
+  export type StreamUncheckedCreateWithoutCategoryInput = {
+    id?: string
+    title: string
+    thumbnailUrl?: string | null
+    ingressId?: string | null
+    serverUrl?: string | null
+    streamKey?: string | null
+    isLive?: boolean
+    userId?: string | null
+    createdAt?: Date | string
+    updatedAt?: Date | string
+  }
+
+  export type StreamCreateOrConnectWithoutCategoryInput = {
+    where: StreamWhereUniqueInput
+    create: XOR<StreamCreateWithoutCategoryInput, StreamUncheckedCreateWithoutCategoryInput>
+  }
+
+  export type StreamCreateManyCategoryInputEnvelope = {
+    data: StreamCreateManyCategoryInput | StreamCreateManyCategoryInput[]
+    skipDuplicates?: boolean
+  }
+
+  export type StreamUpsertWithWhereUniqueWithoutCategoryInput = {
+    where: StreamWhereUniqueInput
+    update: XOR<StreamUpdateWithoutCategoryInput, StreamUncheckedUpdateWithoutCategoryInput>
+    create: XOR<StreamCreateWithoutCategoryInput, StreamUncheckedCreateWithoutCategoryInput>
+  }
+
+  export type StreamUpdateWithWhereUniqueWithoutCategoryInput = {
+    where: StreamWhereUniqueInput
+    data: XOR<StreamUpdateWithoutCategoryInput, StreamUncheckedUpdateWithoutCategoryInput>
+  }
+
+  export type StreamUpdateManyWithWhereWithoutCategoryInput = {
+    where: StreamScalarWhereInput
+    data: XOR<StreamUpdateManyMutationInput, StreamUncheckedUpdateManyWithoutCategoryInput>
+  }
+
+  export type StreamScalarWhereInput = {
+    AND?: StreamScalarWhereInput | StreamScalarWhereInput[]
+    OR?: StreamScalarWhereInput[]
+    NOT?: StreamScalarWhereInput | StreamScalarWhereInput[]
+    id?: StringFilter<"Stream"> | string
+    title?: StringFilter<"Stream"> | string
+    thumbnailUrl?: StringNullableFilter<"Stream"> | string | null
+    ingressId?: StringNullableFilter<"Stream"> | string | null
+    serverUrl?: StringNullableFilter<"Stream"> | string | null
+    streamKey?: StringNullableFilter<"Stream"> | string | null
+    isLive?: BoolFilter<"Stream"> | boolean
+    userId?: StringNullableFilter<"Stream"> | string | null
+    categoryId?: StringNullableFilter<"Stream"> | string | null
+    createdAt?: DateTimeFilter<"Stream"> | Date | string
+    updatedAt?: DateTimeFilter<"Stream"> | Date | string
   }
 
   export type UserCreateWithoutSocialLinksInput = {
@@ -5504,6 +8366,7 @@ export namespace Prisma {
     createdAt?: Date | string
     updatedAt?: Date | string
     tokens?: TokenCreateNestedManyWithoutUserInput
+    stream?: StreamCreateNestedOneWithoutUserInput
   }
 
   export type UserUncheckedCreateWithoutSocialLinksInput = {
@@ -5523,6 +8386,7 @@ export namespace Prisma {
     createdAt?: Date | string
     updatedAt?: Date | string
     tokens?: TokenUncheckedCreateNestedManyWithoutUserInput
+    stream?: StreamUncheckedCreateNestedOneWithoutUserInput
   }
 
   export type UserCreateOrConnectWithoutSocialLinksInput = {
@@ -5558,6 +8422,7 @@ export namespace Prisma {
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
     tokens?: TokenUpdateManyWithoutUserNestedInput
+    stream?: StreamUpdateOneWithoutUserNestedInput
   }
 
   export type UserUncheckedUpdateWithoutSocialLinksInput = {
@@ -5577,6 +8442,159 @@ export namespace Prisma {
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
     tokens?: TokenUncheckedUpdateManyWithoutUserNestedInput
+    stream?: StreamUncheckedUpdateOneWithoutUserNestedInput
+  }
+
+  export type UserCreateWithoutStreamInput = {
+    id?: string
+    email: string
+    password: string
+    username: string
+    displayName: string
+    avatar?: string | null
+    bio?: string | null
+    isVerified?: boolean
+    isEmailVerified?: boolean
+    isTotpEnabled?: boolean
+    totpSecret?: string | null
+    isDeactivated?: boolean
+    deactivatedAt?: Date | string | null
+    createdAt?: Date | string
+    updatedAt?: Date | string
+    tokens?: TokenCreateNestedManyWithoutUserInput
+    socialLinks?: SocialLinkCreateNestedManyWithoutUserInput
+  }
+
+  export type UserUncheckedCreateWithoutStreamInput = {
+    id?: string
+    email: string
+    password: string
+    username: string
+    displayName: string
+    avatar?: string | null
+    bio?: string | null
+    isVerified?: boolean
+    isEmailVerified?: boolean
+    isTotpEnabled?: boolean
+    totpSecret?: string | null
+    isDeactivated?: boolean
+    deactivatedAt?: Date | string | null
+    createdAt?: Date | string
+    updatedAt?: Date | string
+    tokens?: TokenUncheckedCreateNestedManyWithoutUserInput
+    socialLinks?: SocialLinkUncheckedCreateNestedManyWithoutUserInput
+  }
+
+  export type UserCreateOrConnectWithoutStreamInput = {
+    where: UserWhereUniqueInput
+    create: XOR<UserCreateWithoutStreamInput, UserUncheckedCreateWithoutStreamInput>
+  }
+
+  export type CategoryCreateWithoutStreamsInput = {
+    id?: string
+    title: string
+    slug: string
+    description?: string | null
+    thumbnailUrl: string
+    createdAt?: Date | string
+    updatedAt?: Date | string
+  }
+
+  export type CategoryUncheckedCreateWithoutStreamsInput = {
+    id?: string
+    title: string
+    slug: string
+    description?: string | null
+    thumbnailUrl: string
+    createdAt?: Date | string
+    updatedAt?: Date | string
+  }
+
+  export type CategoryCreateOrConnectWithoutStreamsInput = {
+    where: CategoryWhereUniqueInput
+    create: XOR<CategoryCreateWithoutStreamsInput, CategoryUncheckedCreateWithoutStreamsInput>
+  }
+
+  export type UserUpsertWithoutStreamInput = {
+    update: XOR<UserUpdateWithoutStreamInput, UserUncheckedUpdateWithoutStreamInput>
+    create: XOR<UserCreateWithoutStreamInput, UserUncheckedCreateWithoutStreamInput>
+    where?: UserWhereInput
+  }
+
+  export type UserUpdateToOneWithWhereWithoutStreamInput = {
+    where?: UserWhereInput
+    data: XOR<UserUpdateWithoutStreamInput, UserUncheckedUpdateWithoutStreamInput>
+  }
+
+  export type UserUpdateWithoutStreamInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    email?: StringFieldUpdateOperationsInput | string
+    password?: StringFieldUpdateOperationsInput | string
+    username?: StringFieldUpdateOperationsInput | string
+    displayName?: StringFieldUpdateOperationsInput | string
+    avatar?: NullableStringFieldUpdateOperationsInput | string | null
+    bio?: NullableStringFieldUpdateOperationsInput | string | null
+    isVerified?: BoolFieldUpdateOperationsInput | boolean
+    isEmailVerified?: BoolFieldUpdateOperationsInput | boolean
+    isTotpEnabled?: BoolFieldUpdateOperationsInput | boolean
+    totpSecret?: NullableStringFieldUpdateOperationsInput | string | null
+    isDeactivated?: BoolFieldUpdateOperationsInput | boolean
+    deactivatedAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    tokens?: TokenUpdateManyWithoutUserNestedInput
+    socialLinks?: SocialLinkUpdateManyWithoutUserNestedInput
+  }
+
+  export type UserUncheckedUpdateWithoutStreamInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    email?: StringFieldUpdateOperationsInput | string
+    password?: StringFieldUpdateOperationsInput | string
+    username?: StringFieldUpdateOperationsInput | string
+    displayName?: StringFieldUpdateOperationsInput | string
+    avatar?: NullableStringFieldUpdateOperationsInput | string | null
+    bio?: NullableStringFieldUpdateOperationsInput | string | null
+    isVerified?: BoolFieldUpdateOperationsInput | boolean
+    isEmailVerified?: BoolFieldUpdateOperationsInput | boolean
+    isTotpEnabled?: BoolFieldUpdateOperationsInput | boolean
+    totpSecret?: NullableStringFieldUpdateOperationsInput | string | null
+    isDeactivated?: BoolFieldUpdateOperationsInput | boolean
+    deactivatedAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    tokens?: TokenUncheckedUpdateManyWithoutUserNestedInput
+    socialLinks?: SocialLinkUncheckedUpdateManyWithoutUserNestedInput
+  }
+
+  export type CategoryUpsertWithoutStreamsInput = {
+    update: XOR<CategoryUpdateWithoutStreamsInput, CategoryUncheckedUpdateWithoutStreamsInput>
+    create: XOR<CategoryCreateWithoutStreamsInput, CategoryUncheckedCreateWithoutStreamsInput>
+    where?: CategoryWhereInput
+  }
+
+  export type CategoryUpdateToOneWithWhereWithoutStreamsInput = {
+    where?: CategoryWhereInput
+    data: XOR<CategoryUpdateWithoutStreamsInput, CategoryUncheckedUpdateWithoutStreamsInput>
+  }
+
+  export type CategoryUpdateWithoutStreamsInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    title?: StringFieldUpdateOperationsInput | string
+    slug?: StringFieldUpdateOperationsInput | string
+    description?: NullableStringFieldUpdateOperationsInput | string | null
+    thumbnailUrl?: StringFieldUpdateOperationsInput | string
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+  }
+
+  export type CategoryUncheckedUpdateWithoutStreamsInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    title?: StringFieldUpdateOperationsInput | string
+    slug?: StringFieldUpdateOperationsInput | string
+    description?: NullableStringFieldUpdateOperationsInput | string | null
+    thumbnailUrl?: StringFieldUpdateOperationsInput | string
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
   }
 
   export type UserCreateWithoutTokensInput = {
@@ -5596,6 +8614,7 @@ export namespace Prisma {
     createdAt?: Date | string
     updatedAt?: Date | string
     socialLinks?: SocialLinkCreateNestedManyWithoutUserInput
+    stream?: StreamCreateNestedOneWithoutUserInput
   }
 
   export type UserUncheckedCreateWithoutTokensInput = {
@@ -5615,6 +8634,7 @@ export namespace Prisma {
     createdAt?: Date | string
     updatedAt?: Date | string
     socialLinks?: SocialLinkUncheckedCreateNestedManyWithoutUserInput
+    stream?: StreamUncheckedCreateNestedOneWithoutUserInput
   }
 
   export type UserCreateOrConnectWithoutTokensInput = {
@@ -5650,6 +8670,7 @@ export namespace Prisma {
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
     socialLinks?: SocialLinkUpdateManyWithoutUserNestedInput
+    stream?: StreamUpdateOneWithoutUserNestedInput
   }
 
   export type UserUncheckedUpdateWithoutTokensInput = {
@@ -5669,6 +8690,7 @@ export namespace Prisma {
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
     socialLinks?: SocialLinkUncheckedUpdateManyWithoutUserNestedInput
+    stream?: StreamUncheckedUpdateOneWithoutUserNestedInput
   }
 
   export type TokenCreateWithoutUserInput = {
@@ -5727,6 +8749,37 @@ export namespace Prisma {
     skipDuplicates?: boolean
   }
 
+  export type StreamCreateWithoutUserInput = {
+    id?: string
+    title: string
+    thumbnailUrl?: string | null
+    ingressId?: string | null
+    serverUrl?: string | null
+    streamKey?: string | null
+    isLive?: boolean
+    createdAt?: Date | string
+    updatedAt?: Date | string
+    category?: CategoryCreateNestedOneWithoutStreamsInput
+  }
+
+  export type StreamUncheckedCreateWithoutUserInput = {
+    id?: string
+    title: string
+    thumbnailUrl?: string | null
+    ingressId?: string | null
+    serverUrl?: string | null
+    streamKey?: string | null
+    isLive?: boolean
+    categoryId?: string | null
+    createdAt?: Date | string
+    updatedAt?: Date | string
+  }
+
+  export type StreamCreateOrConnectWithoutUserInput = {
+    where: StreamWhereUniqueInput
+    create: XOR<StreamCreateWithoutUserInput, StreamUncheckedCreateWithoutUserInput>
+  }
+
   export type TokenUpsertWithWhereUniqueWithoutUserInput = {
     where: TokenWhereUniqueInput
     update: XOR<TokenUpdateWithoutUserInput, TokenUncheckedUpdateWithoutUserInput>
@@ -5783,6 +8836,95 @@ export namespace Prisma {
     userId?: StringNullableFilter<"SocialLink"> | string | null
     createdAt?: DateTimeFilter<"SocialLink"> | Date | string
     updatedAt?: DateTimeFilter<"SocialLink"> | Date | string
+  }
+
+  export type StreamUpsertWithoutUserInput = {
+    update: XOR<StreamUpdateWithoutUserInput, StreamUncheckedUpdateWithoutUserInput>
+    create: XOR<StreamCreateWithoutUserInput, StreamUncheckedCreateWithoutUserInput>
+    where?: StreamWhereInput
+  }
+
+  export type StreamUpdateToOneWithWhereWithoutUserInput = {
+    where?: StreamWhereInput
+    data: XOR<StreamUpdateWithoutUserInput, StreamUncheckedUpdateWithoutUserInput>
+  }
+
+  export type StreamUpdateWithoutUserInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    title?: StringFieldUpdateOperationsInput | string
+    thumbnailUrl?: NullableStringFieldUpdateOperationsInput | string | null
+    ingressId?: NullableStringFieldUpdateOperationsInput | string | null
+    serverUrl?: NullableStringFieldUpdateOperationsInput | string | null
+    streamKey?: NullableStringFieldUpdateOperationsInput | string | null
+    isLive?: BoolFieldUpdateOperationsInput | boolean
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    category?: CategoryUpdateOneWithoutStreamsNestedInput
+  }
+
+  export type StreamUncheckedUpdateWithoutUserInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    title?: StringFieldUpdateOperationsInput | string
+    thumbnailUrl?: NullableStringFieldUpdateOperationsInput | string | null
+    ingressId?: NullableStringFieldUpdateOperationsInput | string | null
+    serverUrl?: NullableStringFieldUpdateOperationsInput | string | null
+    streamKey?: NullableStringFieldUpdateOperationsInput | string | null
+    isLive?: BoolFieldUpdateOperationsInput | boolean
+    categoryId?: NullableStringFieldUpdateOperationsInput | string | null
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+  }
+
+  export type StreamCreateManyCategoryInput = {
+    id?: string
+    title: string
+    thumbnailUrl?: string | null
+    ingressId?: string | null
+    serverUrl?: string | null
+    streamKey?: string | null
+    isLive?: boolean
+    userId?: string | null
+    createdAt?: Date | string
+    updatedAt?: Date | string
+  }
+
+  export type StreamUpdateWithoutCategoryInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    title?: StringFieldUpdateOperationsInput | string
+    thumbnailUrl?: NullableStringFieldUpdateOperationsInput | string | null
+    ingressId?: NullableStringFieldUpdateOperationsInput | string | null
+    serverUrl?: NullableStringFieldUpdateOperationsInput | string | null
+    streamKey?: NullableStringFieldUpdateOperationsInput | string | null
+    isLive?: BoolFieldUpdateOperationsInput | boolean
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    user?: UserUpdateOneWithoutStreamNestedInput
+  }
+
+  export type StreamUncheckedUpdateWithoutCategoryInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    title?: StringFieldUpdateOperationsInput | string
+    thumbnailUrl?: NullableStringFieldUpdateOperationsInput | string | null
+    ingressId?: NullableStringFieldUpdateOperationsInput | string | null
+    serverUrl?: NullableStringFieldUpdateOperationsInput | string | null
+    streamKey?: NullableStringFieldUpdateOperationsInput | string | null
+    isLive?: BoolFieldUpdateOperationsInput | boolean
+    userId?: NullableStringFieldUpdateOperationsInput | string | null
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+  }
+
+  export type StreamUncheckedUpdateManyWithoutCategoryInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    title?: StringFieldUpdateOperationsInput | string
+    thumbnailUrl?: NullableStringFieldUpdateOperationsInput | string | null
+    ingressId?: NullableStringFieldUpdateOperationsInput | string | null
+    serverUrl?: NullableStringFieldUpdateOperationsInput | string | null
+    streamKey?: NullableStringFieldUpdateOperationsInput | string | null
+    isLive?: BoolFieldUpdateOperationsInput | boolean
+    userId?: NullableStringFieldUpdateOperationsInput | string | null
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
   }
 
   export type TokenCreateManyUserInput = {

@@ -27,7 +27,8 @@ export class AccountService {
 				id
 			},
 			include: {
-				socialLinks: true
+				socialLinks: true,
+				stream: true
 			}
 		})
 
@@ -62,7 +63,12 @@ export class AccountService {
 				username,
 				email,
 				password: await hash(password),
-				displayName: username
+				displayName: username,
+				stream: {
+					create: {
+						title: `Стрим ${username}`
+					}
+				}
 			}
 		})
 
