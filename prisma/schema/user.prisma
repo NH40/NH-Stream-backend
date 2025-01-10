@@ -19,9 +19,10 @@ model User {
   isDeactivated Boolean   @default(false) @map("is_deactivated")
   deactivatedAt DateTime? @map("deactivated_at")
 
-  tokens      Token[]
-  socialLinks SocialLink[]
-  stream      Stream?
+  tokens       Token[]
+  socialLinks  SocialLink[]
+  stream       Stream?
+  chatMessages ChatMessage[]
 
   createdAt DateTime @default(now()) @map("created_at")
   updatedAt DateTime @updatedAt @map("updated_at")

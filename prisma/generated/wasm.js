@@ -127,6 +127,15 @@ exports.Prisma.CategoryScalarFieldEnum = {
   updatedAt: 'updatedAt'
 };
 
+exports.Prisma.ChatMessageScalarFieldEnum = {
+  id: 'id',
+  text: 'text',
+  userId: 'userId',
+  streamId: 'streamId',
+  createdAt: 'createdAt',
+  updatedAt: 'updatedAt'
+};
+
 exports.Prisma.SocialLinkScalarFieldEnum = {
   id: 'id',
   title: 'title',
@@ -145,6 +154,9 @@ exports.Prisma.StreamScalarFieldEnum = {
   serverUrl: 'serverUrl',
   streamKey: 'streamKey',
   isLive: 'isLive',
+  isChatEnabled: 'isChatEnabled',
+  isChatFollowersOnly: 'isChatFollowersOnly',
+  isChatPremiumFollowersOnly: 'isChatPremiumFollowersOnly',
   userId: 'userId',
   categoryId: 'categoryId',
   createdAt: 'createdAt',
@@ -201,6 +213,7 @@ exports.TokenType = exports.$Enums.TokenType = {
 
 exports.Prisma.ModelName = {
   Category: 'Category',
+  ChatMessage: 'ChatMessage',
   SocialLink: 'SocialLink',
   Stream: 'Stream',
   Token: 'Token',

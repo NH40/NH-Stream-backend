@@ -1,0 +1,16 @@
+model ChatMessage {
+  id String @id @default(uuid())
+
+  text String
+
+  user   User   @relation(fields: [userId], references: [id], onDelete: Cascade)
+  userId String @map("user_id")
+
+  stream   Stream @relation(fields: [streamId], references: [id], onDelete: Cascade)
+  streamId String @map("stream_id")
+
+  createdAt DateTime @default(now()) @map("created_at")
+  updatedAt DateTime @updatedAt @map("updated_at")
+
+  @@map("chat_messages")
+}
