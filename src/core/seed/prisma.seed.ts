@@ -56,7 +56,7 @@ async function seed() {
 				if (!userExists) {
 					const createdUser = await tx.user.create({
 						data: {
-							email: `${username}@teastream.ru`,
+							email: `${username}@nhstream.ru`,
 							password: await hash('12345678'),
 							username,
 							displayName: username,
