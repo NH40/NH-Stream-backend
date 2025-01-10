@@ -17,7 +17,7 @@ export async function generateToken(
 		token = Math.floor(Math.random() * (1000000 - 100000) + 100000).toString()
 	}
 
-	const expiresIn = new Date(new Date().getTime() + 900000) // 15 minutes
+	const expiresIn = new Date(new Date().getTime() + 300000)
 
 	const existingToken = await prismaService.token.findFirst({
 		where: {
@@ -48,7 +48,11 @@ export async function generateToken(
 			}
 		},
 		include: {
-			user: true
+			user: {
+				include: {
+					notificationSettings: true
+				}
+			}
 		}
 	})
 

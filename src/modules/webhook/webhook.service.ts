@@ -3,6 +3,7 @@ import { Injectable } from '@nestjs/common'
 import { PrismaService } from '@/src/core/prisma/prisma.service'
 
 import { LivekitService } from '../libs/livekit/livekit.service'
+import { TelegramService } from '../libs/telegram/telegram.service'
 import { NotificationService } from '../notification/notification.service'
 
 @Injectable()
@@ -10,7 +11,8 @@ export class WebhookService {
 	public constructor(
 		private readonly prismaService: PrismaService,
 		private readonly livekitService: LivekitService,
-		private readonly notificationService: NotificationService
+		private readonly notificationService: NotificationService,
+		private readonly telegramService: TelegramService
 	) {}
 
 	public async receiveWebhookLivekit(body: string, authorization: string) {
@@ -58,22 +60,21 @@ export class WebhookService {
 						stream.user
 					)
 				}
-			}
 
-			// 	if (
-			// 		follower.notificationSettings.telegramNotifications &&
-			// 		follower.telegramId
-			// 	) {
-			// 		await this.telegramService.sendStreamStart(
-			// 			follower.telegramId,
-			// 			stream.user
-			// 		)
-			// 	}
-			// }
+				if (
+					follower.notificationSettings.telegramNotifications &&
+					follower.telegramId
+				) {
+					await this.telegramService.sendStreamStart(
+						follower.telegramId,
+						stream.user
+					)
+				}
+			}
 		}
 
 		if (event.event === 'ingress_ended') {
-			await this.prismaService.stream.update({
+			const stream = await this.prismaService.stream.update({
 				where: {
 					ingressId: event.ingressInfo.ingressId
 				},
@@ -82,11 +83,11 @@ export class WebhookService {
 				}
 			})
 
-			// await this.prismaService.chatMessage.deleteMany({
-			// 	where: {
-			// 		streamId: stream.id
-			// 	}
-			// })
+			await this.prismaService.chatMessage.deleteMany({
+				where: {
+					streamId: stream.id
+				}
+			})
 		}
 	}
 }

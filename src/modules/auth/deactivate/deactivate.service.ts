@@ -15,6 +15,7 @@ import { getSessionMetadata } from '@/src/shared/utils/session-metadata.util'
 import { destroySession } from '@/src/shared/utils/session.util'
 
 import { MailService } from '../../libs/mail/mail.service'
+import { TelegramService } from '../../libs/telegram/telegram.service'
 
 import { DeactivateAccountInput } from './inputs/deactivate-account.input'
 
@@ -22,9 +23,10 @@ import { DeactivateAccountInput } from './inputs/deactivate-account.input'
 export class DeactivateService {
 	public constructor(
 		private readonly prismaService: PrismaService,
+		private readonly redisService: RedisService,
 		private readonly configService: ConfigService,
 		private readonly mailService: MailService,
-		private readonly redisService: RedisService
+		private readonly telegramService: TelegramService
 	) {}
 
 	public async deactivate(
@@ -35,8 +37,8 @@ export class DeactivateService {
 	) {
 		const { email, password, pin } = input
 
-		if (email !== user.email) {
-			throw new BadRequestException('Неверный email')
+		if (user.email !== email) {
+			throw new BadRequestException('Неверная почта')
 		}
 
 		const isValidPassword = await verify(user.password, password)
@@ -48,9 +50,7 @@ export class DeactivateService {
 		if (!pin) {
 			await this.sendDeactivateToken(req, user, userAgent)
 
-			return {
-				message: 'На вашу почту отправлен токен для деактивации аккаунта'
-			}
+			return { message: 'Требуется код подтверждения' }
 		}
 
 		await this.validateDeactivateToken(req, pin)
@@ -98,7 +98,7 @@ export class DeactivateService {
 		return destroySession(req, this.configService)
 	}
 
-	public async sendDeactivateToken(
+	private async sendDeactivateToken(
 		req: Request,
 		user: User,
 		userAgent: string
@@ -117,6 +117,19 @@ export class DeactivateService {
 			deactivateToken.token,
 			metadata
 		)
+
+		if (
+			deactivateToken.user.notificationSettings.telegramNotifications &&
+			deactivateToken.user.telegramId
+		) {
+			await this.telegramService.sendDeactivateToken(
+				deactivateToken.user.telegramId,
+				deactivateToken.token,
+				metadata
+			)
+		}
+
+		return true
 	}
 
 	private async clearSessions(userId: string) {

@@ -1,8 +1,9 @@
-import { Module } from '@nestjs/common';
-import { DeactivateService } from './deactivate.service';
-import { DeactivateResolver } from './deactivate.resolver';
+import { Module } from '@nestjs/common'
+
+import { DeactivateResolver } from './deactivate.resolver'
+import { DeactivateService } from './deactivate.service'
 
 @Module({
-  providers: [DeactivateResolver, DeactivateService],
+	providers: [DeactivateResolver, DeactivateService]
 })
 export class DeactivateModule {}
