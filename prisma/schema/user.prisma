@@ -24,6 +24,9 @@ model User {
   stream       Stream?
   chatMessages ChatMessage[]
 
+  followers  Follow[] @relation(name: "followers")
+  followings Follow[] @relation(name: "followings")
+
   createdAt DateTime @default(now()) @map("created_at")
   updatedAt DateTime @updatedAt @map("updated_at")
 
