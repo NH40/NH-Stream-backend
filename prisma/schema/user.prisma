@@ -10,6 +10,8 @@ model User {
   avatar String?
   bio    String?
 
+  telegramId String? @map("telegram_id")
+
   isVerified Boolean @default(false) @map("is_verified")
 
   isEmailVerified Boolean @default(false) @map("is_email_verified")
@@ -19,10 +21,12 @@ model User {
   isDeactivated Boolean   @default(false) @map("is_deactivated")
   deactivatedAt DateTime? @map("deactivated_at")
 
-  tokens       Token[]
-  socialLinks  SocialLink[]
-  stream       Stream?
-  chatMessages ChatMessage[]
+  tokens               Token[]
+  socialLinks          SocialLink[]
+  stream               Stream?
+  chatMessages         ChatMessage[]
+  notification         Notification[]
+  notificationSettings NotificationSettings?
 
   followers  Follow[] @relation(name: "followers")
   followings Follow[] @relation(name: "followings")

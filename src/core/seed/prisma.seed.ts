@@ -56,7 +56,7 @@ async function seed() {
 				if (!userExists) {
 					const createdUser = await tx.user.create({
 						data: {
-							email: `${username}@nhstream.ru`,
+							email: `${username}@teastream.ru`,
 							password: await hash('12345678'),
 							username,
 							displayName: username,
@@ -77,6 +77,9 @@ async function seed() {
 										}
 									]
 								}
+							},
+							notificationSettings: {
+								create: {}
 							}
 						}
 					})
@@ -114,7 +117,7 @@ async function seed() {
 		Logger.error(error)
 		throw new BadRequestException('Ошибка при заполнении базы данных')
 	} finally {
-		Logger.log('Закрытие соединения с базой данных')
+		Logger.log('Закрытие соединения с базой данных...')
 		await prisma.$disconnect()
 		Logger.log('Соединение с базой данных успешно закрыто')
 	}
