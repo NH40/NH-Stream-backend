@@ -64,7 +64,7 @@ export class CronService {
 		})
 	}
 
-	@Cron('0 0 */4 * *')
+	@Cron(CRON_TIME.EVERY_4_HOURS)
 	public async notifyUsersEnableTwoFactor() {
 		const users = await this.prismaService.user.findMany({
 			where: {
