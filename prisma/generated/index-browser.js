@@ -173,6 +173,28 @@ exports.Prisma.SocialLinkScalarFieldEnum = {
   updatedAt: 'updatedAt'
 };
 
+exports.Prisma.SponsorshipPlanScalarFieldEnum = {
+  id: 'id',
+  title: 'title',
+  description: 'description',
+  price: 'price',
+  stripeProductId: 'stripeProductId',
+  stripePlanId: 'stripePlanId',
+  channelId: 'channelId',
+  createdAt: 'createdAt',
+  updatedAt: 'updatedAt'
+};
+
+exports.Prisma.SponsorshipSubscriptionScalarFieldEnum = {
+  id: 'id',
+  expiresAt: 'expiresAt',
+  planId: 'planId',
+  userId: 'userId',
+  channelId: 'channelId',
+  createdAt: 'createdAt',
+  updatedAt: 'updatedAt'
+};
+
 exports.Prisma.StreamScalarFieldEnum = {
   id: 'id',
   title: 'title',
@@ -195,6 +217,17 @@ exports.Prisma.TokenScalarFieldEnum = {
   token: 'token',
   type: 'type',
   expiresIn: 'expiresIn',
+  userId: 'userId',
+  createdAt: 'createdAt',
+  updatedAt: 'updatedAt'
+};
+
+exports.Prisma.TransactionScalarFieldEnum = {
+  id: 'id',
+  amount: 'amount',
+  currency: 'currency',
+  stripeSubscriptionId: 'stripeSubscriptionId',
+  status: 'status',
   userId: 'userId',
   createdAt: 'createdAt',
   updatedAt: 'updatedAt'
@@ -248,6 +281,13 @@ exports.TokenType = exports.$Enums.TokenType = {
   TELEGRAM_AUTH: 'TELEGRAM_AUTH'
 };
 
+exports.TransactionStatus = exports.$Enums.TransactionStatus = {
+  PENDING: 'PENDING',
+  SUCCESS: 'SUCCESS',
+  FAILED: 'FAILED',
+  EXPIRED: 'EXPIRED'
+};
+
 exports.Prisma.ModelName = {
   Category: 'Category',
   ChatMessage: 'ChatMessage',
@@ -255,8 +295,11 @@ exports.Prisma.ModelName = {
   NotificationSettings: 'NotificationSettings',
   Notification: 'Notification',
   SocialLink: 'SocialLink',
+  SponsorshipPlan: 'SponsorshipPlan',
+  SponsorshipSubscription: 'SponsorshipSubscription',
   Stream: 'Stream',
   Token: 'Token',
+  Transaction: 'Transaction',
   User: 'User'
 };
 

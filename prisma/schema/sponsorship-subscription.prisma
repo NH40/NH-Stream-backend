@@ -1,0 +1,19 @@
+model SponsorshipSubscription {
+  id String @id @default(uuid())
+
+  expiresAt DateTime @map("expires_at")
+
+  plan   SponsorshipPlan? @relation(fields: [planId], references: [id], onDelete: Cascade)
+  planId String?          @map("plan_id")
+
+  user   User?   @relation(name: "sponsorship_subscriptions", fields: [userId], references: [id], onDelete: Cascade)
+  userId String? @map("user_id")
+
+  channel   User?   @relation(name: "sponsors", fields: [channelId], references: [id], onDelete: Cascade)
+  channelId String? @map("channel_id")
+
+  createdAt DateTime @default(now()) @map("created_at")
+  updatedAt DateTime @updatedAt @map("updated_at")
+
+  @@map("sponsorship_subscriptions")
+}

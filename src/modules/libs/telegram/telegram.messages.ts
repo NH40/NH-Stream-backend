@@ -1,4 +1,4 @@
-import type { User } from '@/prisma/generated'
+import type { SponsorshipPlan, User } from '@/prisma/generated'
 import type { SessionMetadata } from '@/src/shared/types/session-metadata.types'
 
 export const MESSAGES = {
@@ -64,12 +64,12 @@ export const MESSAGES = {
 		`Смотрите здесь: <a href="https://nhstream.ru/${channel.username}">Перейти к трансляции</a>`,
 	newFollowing: (follower: User, followersCount: number) =>
 		`<b>У вас новый подписчик!</b>\n\nЭто пользователь <a href="https://nhstream.ru/${follower.username}">${follower.displayName}</a>\n\nИтоговое количество подписчиков на вашем канале: ${followersCount}`,
-	// newSponsorship: (plan: SponsorshipPlan, sponsor: User) =>
-	// 	`<b>🎉 Новое спонсор!</b>\n\n` +
-	// 	`Вы получили новое спонсорство на план <b>${plan.title}</b>.\n` +
-	// 	`💰 Сумма: <b>${plan.price} ₽</b>\n` +
-	// 	`👤 Спонсор: <a href="https://nhstream.ru/${sponsor.username}">${sponsor.displayName}</a>\n` +
-	// 	`📅 Дата оформления: <b>${new Date().toLocaleDateString()} в ${new Date().toLocaleTimeString()}</b>`,
+	newSponsorship: (plan: SponsorshipPlan, sponsor: User) =>
+		`<b>🎉 Новое спонсор!</b>\n\n` +
+		`Вы получили новое спонсорство на план <b>${plan.title}</b>.\n` +
+		`💰 Сумма: <b>${plan.price} ₽</b>\n` +
+		`👤 Спонсор: <a href="https://nhstream.ru/${sponsor.username}">${sponsor.displayName}</a>\n` +
+		`📅 Дата оформления: <b>${new Date().toLocaleDateString()} в ${new Date().toLocaleTimeString()}</b>`,
 	enableTwoFactor:
 		`🔐 Обеспечьте свою безопасность!\n\n` +
 		`Включите двухфакторную аутентификацию в <a href="https://nhstream.ru/dashboard/settings">настройках аккаунта</a>.`,
