@@ -1,5 +1,5 @@
 import {
-	BadRequestException,
+	ConflictException,
 	Injectable,
 	UnauthorizedException
 } from '@nestjs/common'
@@ -28,7 +28,8 @@ export class AccountService {
 			},
 			include: {
 				socialLinks: true,
-				stream: true
+				stream: true,
+				notificationSettings: true
 			}
 		})
 
@@ -38,14 +39,14 @@ export class AccountService {
 	public async create(input: CreateUserInput) {
 		const { username, email, password } = input
 
-		const isUserNameExists = await this.prismaService.user.findUnique({
+		const isUsernameExists = await this.prismaService.user.findUnique({
 			where: {
 				username
 			}
 		})
 
-		if (isUserNameExists) {
-			throw new Error('Это имя пользователя уже занято')
+		if (isUsernameExists) {
+			throw new ConflictException('Это имя пользователя уже занято')
 		}
 
 		const isEmailExists = await this.prismaService.user.findUnique({
@@ -55,7 +56,7 @@ export class AccountService {
 		})
 
 		if (isEmailExists) {
-			throw new Error('Пользователь с этим email уже зарегистрирован')
+			throw new ConflictException('Эта почта уже занята')
 		}
 
 		const user = await this.prismaService.user.create({
@@ -68,6 +69,9 @@ export class AccountService {
 					create: {
 						title: `Стрим ${username}`
 					}
+				},
+				notificationSettings: {
+					create: {}
 				}
 			}
 		})
@@ -79,18 +83,6 @@ export class AccountService {
 
 	public async changeEmail(user: User, input: ChangeEmailInput) {
 		const { email } = input
-
-		const isEmailExists = await this.prismaService.user.findUnique({
-			where: {
-				email
-			}
-		})
-
-		if (isEmailExists) {
-			throw new BadRequestException(
-				'Пользователь с этим email уже зарегистрирован'
-			)
-		}
 
 		await this.prismaService.user.update({
 			where: {
