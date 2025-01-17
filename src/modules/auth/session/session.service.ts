@@ -12,7 +12,6 @@ import { TOTP } from 'otpauth'
 
 import { PrismaService } from '@/src/core/prisma/prisma.service'
 import { RedisService } from '@/src/core/redis/redis.service'
-import { SITE_NAME } from '@/src/shared/constants/app.constants'
 import { getSessionMetadata } from '@/src/shared/utils/session-metadata.util'
 import { destroySession, saveSession } from '@/src/shared/utils/session.util'
 
@@ -23,9 +22,9 @@ import { LoginInput } from './inputs/login.input'
 @Injectable()
 export class SessionService {
 	public constructor(
-		private readonly configService: ConfigService,
-		private readonly redisService: RedisService,
 		private readonly prismaService: PrismaService,
+		private readonly redisService: RedisService,
+		private readonly configService: ConfigService,
 		private readonly verificationService: VerificationService
 	) {}
 
@@ -36,14 +35,16 @@ export class SessionService {
 			throw new NotFoundException('Пользователь не обнаружен в сессии')
 		}
 
-		const keys = await this.redisService.get('*')
+		const keys = await this.redisService.keys('*')
 
 		const userSessions = []
 
 		for (const key of keys) {
 			const sessionData = await this.redisService.get(key)
+
 			if (sessionData) {
 				const session = JSON.parse(sessionData)
+
 				if (session.userId === userId) {
 					userSessions.push({
 						...session,
@@ -82,8 +83,8 @@ export class SessionService {
 			}
 		})
 
-		if (!user) {
-			throw new NotFoundException('Пользователь с таким логином не найден')
+		if (!user || user.isDeactivated) {
+			throw new NotFoundException('Пользователь не найден')
 		}
 
 		const isValidPassword = await verify(user.password, password)
@@ -103,12 +104,12 @@ export class SessionService {
 		if (user.isTotpEnabled) {
 			if (!pin) {
 				return {
-					message: 'Пожалуйста, введите код из приложения'
+					message: 'Необходим код для завершения авторизации'
 				}
 			}
 
 			const totp = new TOTP({
-				issuer: SITE_NAME,
+				issuer: 'TeaStream',
 				label: `${user.email}`,
 				algorithm: 'SHA1',
 				digits: 6,
