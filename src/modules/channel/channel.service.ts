@@ -7,7 +7,7 @@ export class ChannelService {
 	public constructor(private readonly prismaService: PrismaService) {}
 
 	public async findRecommended() {
-		const channels = await this.prismaService.user.findMany({
+		const channles = await this.prismaService.user.findMany({
 			where: {
 				isDeactivated: false
 			},
@@ -22,7 +22,7 @@ export class ChannelService {
 			take: 7
 		})
 
-		return channels
+		return channles
 	}
 
 	public async findByUsername(username: string) {
@@ -42,7 +42,9 @@ export class ChannelService {
 						category: true
 					}
 				},
-				followings: true
+				followings: true,
+				sponsorshipPlans: true,
+				sponsorshipSubscriptions: true
 			}
 		})
 
